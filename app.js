@@ -139,7 +139,7 @@ function cardHtml(q, isOpen) {
         <button data-action="edit" data-id="${id}" class="hover:text-purple-400 p-1 transition-colors" title="Edytuj" aria-label="Edytuj wypowiedź"><i class="fa-solid fa-pen text-xs"></i></button>
         <button data-action="delete" data-id="${id}" class="hover:text-red-400 p-1 transition-colors" title="Usuń" aria-label="Usuń wypowiedź"><i class="fa-solid fa-trash text-xs"></i></button>` : '';
     return `
-    <div class="bg-darkCard border border-darkBorder rounded-2xl p-6 flex flex-col justify-between card-hover relative overflow-hidden">
+    <div class="bg-darkCard border border-darkBorder rounded-2xl p-4 sm:p-6 flex flex-col justify-between card-hover relative overflow-hidden">
         <div class="absolute left-0 top-0 bottom-0 w-1.5 ${conf.badgeBg}"></div>
         <div>
             <div class="flex items-start justify-between gap-2 mb-3 pl-2">
@@ -151,7 +151,7 @@ function cardHtml(q, isOpen) {
                 <div class="flex items-center gap-1.5 text-gray-400">${adminBtns}</div>
             </div>
             <blockquote class="text-base sm:text-lg font-semibold text-white pl-3 my-3 leading-snug italic border-l-2 border-purple-700/60">„${esc(q.quote)}”</blockquote>
-            <div class="flex items-center justify-between text-xs text-gray-400 pl-3 mb-4">
+            <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-gray-400 pl-3 mb-4">
                 <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-red-500"></i> Kontekst: <strong class="text-gray-300 font-medium">${esc(q.context)}</strong></span>
                 <span class="text-[11px] text-gray-400 font-mono">${esc(q.date)}</span>
             </div>
@@ -165,10 +165,10 @@ function cardHtml(q, isOpen) {
                 <div class="mt-2 text-xs text-gray-300 leading-relaxed bg-darkBg/60 p-3 rounded-xl border border-darkBorder/60">${esc(q.reason)}</div>
             </details>
             <div class="flex items-center justify-between mt-4 pt-2 border-t border-darkBorder/40 text-xs">
-                <button data-action="like" data-id="${id}" aria-pressed="${isLiked}" class="flex items-center gap-1.5 ${isLiked ? 'text-amber-400' : 'text-gray-400'} hover:text-amber-400 transition-colors px-2.5 py-1 rounded-lg bg-darkBg border border-darkBorder">
+                <button data-action="like" data-id="${id}" aria-pressed="${isLiked}" class="flex items-center gap-1.5 ${isLiked ? 'text-amber-400' : 'text-gray-400'} hover:text-amber-400 transition-colors px-3 py-2 sm:px-2.5 sm:py-1 rounded-lg bg-darkBg border border-darkBorder">
                     <i class="fa-solid fa-shield-halved text-amber-500"></i><span>Potwierdzenia:</span><strong class="text-white">${likeCount(q)}</strong>
                 </button>
-                <button data-action="copy" data-id="${id}" class="text-gray-400 hover:text-white transition-colors px-2 py-1 rounded bg-darkBg border border-darkBorder flex items-center gap-1"><i class="fa-solid fa-share-nodes"></i> Kopiuj</button>
+                <button data-action="copy" data-id="${id}" class="text-gray-400 hover:text-white transition-colors px-3 py-2 sm:px-2 sm:py-1 rounded bg-darkBg border border-darkBorder flex items-center gap-1"><i class="fa-solid fa-share-nodes"></i> Kopiuj</button>
             </div>
         </div>
     </div>`;

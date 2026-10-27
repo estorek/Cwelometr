@@ -24,3 +24,16 @@ body {
         ::-webkit-scrollbar-track { background: #08080c; }
         ::-webkit-scrollbar-thumb { background: #1e2230; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #991b1b; }
+
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+/* iOS powiększa stronę po kliknięciu w pole mniejsze niż 16px */
+@media (max-width: 640px) {
+    input, select, textarea { font-size: 16px !important; }
+}
+@media (max-width: 768px) {
+    body { background-attachment: scroll; } /* "fixed" bywa wolne/ignorowane na telefonach */
+}
+@media (hover: none) {
+    .card-hover:hover { transform: none; box-shadow: none; }
+}
