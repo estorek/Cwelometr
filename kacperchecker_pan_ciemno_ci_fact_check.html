@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMAGOG: Pan Ciemności Edition | Fact-Checker Kacpra</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0c10',
+                        darkCard: '#12141c',
+                        darkBorder: '#232736',
+                        truth: '#10b981',
+                        truthBg: 'rgba(16, 185, 129, 0.1)',
+                        falsehood: '#ef4444',
+                        falsehoodBg: 'rgba(239, 68, 68, 0.1)',
+                        halfTruth: '#f59e0b',
+                        halfTruthBg: 'rgba(245, 158, 11, 0.1)',
+                        manipulation: '#a855f7',
+                        manipulationBg: 'rgba(168, 85, 247, 0.1)',
+                        darkAccent: '#dc2626',
+                        goldAccent: '#d97706'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        gothic: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b0c10;
+            color: #e5e7eb;
+            font-family: 'Inter', sans-serif;
+        }
+        .gothic-title {
+            font-family: 'Cinzel', serif;
+        }
+        .glow-red {
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.2);
+        }
+        .glow-purple {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0c10;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #232736;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #dc2626;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-red-900 selection:text-white">
+
+    <!-- Navbar / Header -->
+    <header class="border-b border-darkBorder bg-darkCard/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-900 via-purple-950 to-black flex items-center justify-center border border-red-800/50 shadow-lg glow-red">
+                    <i class="fa-solid fa-skull text-red-500 text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="gothic-title text-xl sm:text-2xl font-bold tracking-wider text-white flex items-center gap-2">
+                        DEMAGOG <span class="text-xs px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-800/50 uppercase tracking-widest font-sans">Pan Ciemności Edition</span>
+                    </h1>
+                    <p class="text-xs text-gray-400">Oficjalne archiwum i weryfikator wypowiedzi Kacpra</p>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#stats" class="text-sm font-medium text-gray-300 hover:text-red-400 transition-colors">Statystyki</a>
+                <a href="#quotes" class="text-sm font-medium text-gray-300 hover:text-red-400 transition-colors">Wypowiedzi</a>
+                <a href="#submit" class="px-4 py-2 rounded-lg bg-red-800 hover:bg-red-700 text-white text-sm font-medium transition-all shadow-md hover:shadow-red-900/50 flex items-center gap-2">
+                    <i class="fa-solid fa-plus text-xs"></i> Zgłoś wypowiedź
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="relative overflow-hidden py-12 bg-gradient-to-b from-darkCard to-darkBg border-b border-darkBorder">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="max-w-2xl text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-800/40 text-purple-300 text-xs font-semibold mb-4">
+                        <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
+                        Niezależny portal fact-checkingowy
+                    </div>
+                    <h2 class="gothic-title text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
+                        Czy Kacper mówi prawdę?<br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-purple-400 to-amber-500">Pan Ciemności pod lupą!</span>
+                    </h2>
+                    <p class="text-gray-400 text-base sm:text-lg mb-6 leading-relaxed">
+                        Weryfikujemy deklaracje, obietnice, groźby i codzienne wymówki Kacpra. Bądź na bieżąco z mrocznym indeksem wiarygodności najbardziej tajemniczej postaci w uniwersum.
+                    </p>
+                    <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+                        <div class="px-4 py-2 rounded-lg bg-darkBg/80 border border-darkBorder flex items-center gap-3">
+                            <i class="fa-solid fa-user-shield text-purple-400 text-xl"></i>
+                            <div class="text-left">
+                                <div class="text-xs text-gray-400">Badany podmiot</div>
+                                <div class="text-sm font-bold text-white">Kacper "Pan Ciemności"</div>
+                            </div>
+                        </div>
+                        <div class="px-4 py-2 rounded-lg bg-darkBg/80 border border-darkBorder flex items-center gap-3">
+                            <i class="fa-solid fa-microscope text-red-400 text-xl"></i>
+                            <div class="text-left">
+                                <div class="text-xs text-gray-400">Metodologia</div>
+                                <div class="text-sm font-bold text-white">Mroczna Rzetelność v2.0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dark Avatar Card -->
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-red-600 via-purple-600 to-amber-600 rounded-2xl blur opacity-30 group-hover:opacity-70 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative w-64 h-64 sm:w-72 sm:h-72 rounded-2xl bg-darkCard border border-darkBorder flex flex-col items-center justify-center p-6 text-center shadow-2xl">
+                        <div class="w-28 h-28 rounded-full bg-gradient-to-b from-gray-800 to-black border-2 border-red-700 flex items-center justify-center mb-4 relative overflow-hidden">
+                            <i class="fa-solid fa-user-ninja text-6xl text-gray-300"></i>
+                            <div class="absolute inset-0 bg-red-900/10 backdrop-brightness-75"></div>
+                        </div>
+                        <h3 class="gothic-title text-xl font-bold text-white">Pan Ciemności</h3>
+                        <p class="text-xs text-red-400 font-mono mt-1">Wskaźnik Prawdomówności: <span id="truthRatePercentage" class="font-bold">0%</span></p>
+                        <div class="w-full bg-gray-800 h-2 rounded-full mt-3 overflow-hidden">
+                            <div id="truthRateBar" class="bg-gradient-to-r from-red-500 to-emerald-500 h-full transition-all duration-1000" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-12">
+
+        <!-- Dashboard / Statistics Section -->
+        <section id="stats" class="scroll-mt-24">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="gothic-title text-2xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-red-500"></i> Raport Wiarygodności
+                    </h3>
+                    <p class="text-sm text-gray-400">Podsumowanie dotychczas przeanalizowanych stwierdzeń</p>
+                </div>
+                <span class="text-xs px-3 py-1 rounded-full bg-darkCard border border-darkBorder text-gray-400">
+                    Suma wypowiedzi: <strong id="totalCount" class="text-white">0</strong>
+                </span>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- PRAWDA -->
+                <div class="bg-darkCard border border-darkBorder rounded-xl p-5 relative overflow-hidden group hover:border-emerald-500/50 transition-colors">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2.5 py-1 rounded-md">Prawda</span>
+                        <i class="fa-solid fa-circle-check text-emerald-400 text-xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-white my-1" id="countPrawda">0</div>
+                    <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
+                        <div id="barPrawda" class="bg-emerald-500 h-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2"><span id="pctPrawda">0%</span> całości wypowiedzi</p>
+                </div>
+
+                <!-- FAŁSZ -->
+                <div class="bg-darkCard border border-darkBorder rounded-xl p-5 relative overflow-hidden group hover:border-red-500/50 transition-colors">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-red-400 bg-red-950/60 border border-red-800/40 px-2.5 py-1 rounded-md">Fałsz</span>
+                        <i class="fa-solid fa-circle-xmark text-red-400 text-xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-white my-1" id="countFalsz">0</div>
+                    <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
+                        <div id="barFalsz" class="bg-red-500 h-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2"><span id="pctFalsz">0%</span> całości wypowiedzi</p>
+                </div>
+
+                <!-- PÓŁPRAWDA -->
+                <div class="bg-darkCard border border-darkBorder rounded-xl p-5 relative overflow-hidden group hover:border-amber-500/50 transition-colors">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-amber-400 bg-amber-950/60 border border-amber-800/40 px-2.5 py-1 rounded-md">Półprawda</span>
+                        <i class="fa-solid fa-adjust text-amber-400 text-xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-white my-1" id="countPolprawda">0</div>
+                    <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
+                        <div id="barPolprawda" class="bg-amber-500 h-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2"><span id="pctPolprawda">0%</span> całości wypowiedzi</p>
+                </div>
+
+                <!-- MANIPULACJA -->
+                <div class="bg-darkCard border border-darkBorder rounded-xl p-5 relative overflow-hidden group hover:border-purple-500/50 transition-colors">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-purple-400 bg-purple-950/60 border border-purple-800/40 px-2.5 py-1 rounded-md">Manipulacja / Mroczna Prawda</span>
+                        <i class="fa-solid fa-mask text-purple-400 text-xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold text-white my-1" id="countManipulacja">0</div>
+                    <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
+                        <div id="barManipulacja" class="bg-purple-500 h-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2"><span id="pctManipulacja">0%</span> całości wypowiedzi</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search & Filter Controls -->
+        <section id="quotes" class="scroll-mt-24 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-darkCard border border-darkBorder p-4 rounded-xl">
+                <!-- Search Bar -->
+                <div class="relative flex-1">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                    <input type="text" id="searchInput" placeholder="Szukaj w wypowiedziach Pana Ciemności..." class="w-full pl-10 pr-4 py-2.5 bg-darkBg border border-darkBorder rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors">
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span class="text-xs text-gray-400 mr-2 hidden lg:inline"><i class="fa-solid fa-filter text-xs mr-1"></i>Filtr:</span>
+                    <button data-filter="ALL" class="filter-btn active text-xs font-medium px-3 py-2 rounded-lg bg-red-800 text-white border border-red-700 transition-all">
+                        Wszystkie
+                    </button>
+                    <button data-filter="PRAWDA" class="filter-btn text-xs font-medium px-3 py-2 rounded-lg bg-darkBg hover:bg-emerald-950/40 text-gray-300 hover:text-emerald-400 border border-darkBorder transition-all">
+                        Prawda
+                    </button>
+                    <button data-filter="FAŁSZ" class="filter-btn text-xs font-medium px-3 py-2 rounded-lg bg-darkBg hover:bg-red-950/40 text-gray-300 hover:text-red-400 border border-darkBorder transition-all">
+                        Fałsz
+                    </button>
+                    <button data-filter="PÓŁPRAWDA" class="filter-btn text-xs font-medium px-3 py-2 rounded-lg bg-darkBg hover:bg-amber-950/40 text-gray-300 hover:text-amber-400 border border-darkBorder transition-all">
+                        Półprawda
+                    </button>
+                    <button data-filter="MANIPULACJA" class="filter-btn text-xs font-medium px-3 py-2 rounded-lg bg-darkBg hover:bg-purple-950/40 text-gray-300 hover:text-purple-400 border border-darkBorder transition-all">
+                        Manipulacja
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cards Container -->
+            <div id="cardsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Fact check cards will be injected dynamically here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden text-center py-12 bg-darkCard border border-darkBorder rounded-xl">
+                <i class="fa-solid fa-ghost text-4xl text-gray-600 mb-3"></i>
+                <p class="text-gray-400 font-medium">Brak wypowiedzi spełniających podane kryteria.</p>
+                <p class="text-xs text-gray-500 mt-1">Ciemność milczy w tym zakresie...</p>
+            </div>
+        </section>
+
+        <!-- Submit New Quote Form Section -->
+        <section id="submit" class="scroll-mt-24">
+            <div class="bg-gradient-to-br from-darkCard via-darkCard to-purple-950/20 border border-darkBorder rounded-2xl p-6 sm:p-8 glow-purple">
+                <div class="max-w-2xl">
+                    <h3 class="gothic-title text-2xl font-bold text-white mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-purple-400"></i> Zgłoś wypowiedź Pana Ciemności
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-6">
+                        Przyłapałeś Kacpra na obietnicy bez pokrycia albo mrocznej manipulacji? Prześlij cytat do naszego zespołu redakcyjnego!
+                    </p>
+
+                    <form id="addQuoteForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Cytat Kacpra *</label>
+                            <textarea id="quoteText" rows="3" required placeholder="np. &quot;Zaraz wracam, idę tylko po szklankę wody.&quot;" class="w-full px-4 py-3 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Kontekst / Okoliczności *</label>
+                                <input type="text" id="quoteContext" required placeholder="np. Rozmowa na Discordzie, 2:15 w nocy" class="w-full px-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Proponowana Ocena *</label>
+                                <select id="quoteRating" class="w-full px-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm text-white focus:outline-none focus:border-purple-500 transition-colors">
+                                    <option value="FAŁSZ">FAŁSZ</option>
+                                    <option value="PÓŁPRAWDA">PÓŁPRAWDA</option>
+                                    <option value="MANIPULACJA">MANIPULACJA</option>
+                                    <option value="PRAWDA">PRAWDA</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Uzasadnienie Redakcji / Dowody *</label>
+                            <textarea id="quoteReason" rows="2" required placeholder="Wyjaśnij dlaczego to prawda/fałsz/manipulacja..." class="w-full px-4 py-3 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"></textarea>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-red-800 to-purple-800 hover:from-red-700 hover:to-purple-700 text-white font-semibold text-sm shadow-lg hover:shadow-purple-900/40 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-skull-crossbones text-xs"></i> Wyślij do weryfikacji
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Custom Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 max-w-sm w-full bg-darkCard border border-purple-500/50 rounded-xl p-4 shadow-2xl flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-purple-950 border border-purple-700 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-check text-purple-400"></i>
+        </div>
+        <div>
+            <h4 class="text-sm font-bold text-white" id="toastTitle">Dodano Wypowiedź!</h4>
+            <p class="text-xs text-gray-400" id="toastMessage">Wypowiedź Pana Ciemności trafiła do archiwum.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-darkBorder bg-darkCard py-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <p class="gothic-title text-sm font-bold text-white">DEMAGOG: Pan Ciemności Edition</p>
+                <p class="text-xs text-gray-500 mt-1">Strona ma charakter satyryczny i fanowski. Wszelkie podobieństwo do mrocznych władców przypadkowe.</p>
+            </div>
+            <div class="text-xs text-gray-500">
+                &copy; 2026 Fact-Checking Kacper. Wszelkie prawa zastrzeżone przez Ciemność.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Application Script -->
+    <script>
+        // Initial Mock Database
+        const initialQuotes = [
+            {
+                id: 1,
+                quote: "Dzisiaj idę wcześniej spać.",
+                context: "Wypowiedziane na czacie o godzinie 22:30",
+                date: "2026-10-24",
+                rating: "FAŁSZ",
+                reason: "Analiza logów aktywności wykazuje, że Pan Ciemności grał na serwerze Minecraft i oglądał uniwersum YouTube aż do 3:00 rano."
+            },
+            {
+                id: 2,
+                quote: "Przejmę władzę nad światem przed niedzielą.",
+                context: "Plan podboju przedstawiony grupie znajomych",
+                date: "2026-10-20",
+                rating: "PÓŁPRAWDA",
+                reason: "Plan został pomyślnie wdrożony, jednak niedzielny obiad u rodziny pokrzyżował ścisły harmonogram mrocznych podbojów."
+            },
+            {
+                id: 3,
+                quote: "Nie ruszałem twoich przekąsek.",
+                context: "Zapytany o zniknięcie paczki chipsów w salonie",
+                date: "2026-10-18",
+                rating: "MANIPULACJA",
+                reason: "Technicznie rzecz biorąc nie ruszył ich ręką – zjadł je bezpośrednio ustami proszono o precyzję wypowiedzi."
+            },
+            {
+                id: 4,
+                quote: "Pan Ciemności zawsze dotrzymuje słowa.",
+                context: "Deklaracja podczas uroczystej przysięgi",
+                date: "2026-10-15",
+                rating: "PRAWDA",
+                reason: "Weryfikacja wykazuje 100% zgodności z Mrocznym Kodeksem Honorowym Kacpra (paragraf 4, ustęp 2)."
+            },
+            {
+                id: 5,
+                quote: "Uczyłem się do tego sprawdzianu cały weekend.",
+                context: "Rozmowa przed wejściem do sali",
+                date: "2026-10-12",
+                rating: "FAŁSZ",
+                reason: "Świadkowie potwierdzają, że cały weekend Kacper spędził na szlifowaniu swojej postaci w grze RPG."
+            },
+            {
+                id: 6,
+                quote: "To nie była moja wina, że przegraliśmy tę rundę.",
+                context: "Komentarz po meczu rankingowym",
+                date: "2026-10-05",
+                rating: "MANIPULACJA",
+                reason: "Zwalenie winy na 'lagi serwera', mimo że ping wynosił stabilne 15ms. Czysta retoryka obronna."
+            }
+        ];
+
+        let quotes = [...initialQuotes];
+        let currentFilter = 'ALL';
+        let searchQuery = '';
+
+        // Helper Configuration for Ratings
+        const ratingConfig = {
+            'PRAWDA': {
+                colorClass: 'text-emerald-400',
+                bgClass: 'bg-emerald-950/60 border-emerald-800/50',
+                badgeBg: 'bg-emerald-500',
+                icon: 'fa-circle-check'
+            },
+            'FAŁSZ': {
+                colorClass: 'text-red-400',
+                bgClass: 'bg-red-950/60 border-red-800/50',
+                badgeBg: 'bg-red-500',
+                icon: 'fa-circle-xmark'
+            },
+            'PÓŁPRAWDA': {
+                colorClass: 'text-amber-400',
+                bgClass: 'bg-amber-950/60 border-amber-800/50',
+                badgeBg: 'bg-amber-500',
+                icon: 'fa-adjust'
+            },
+            'MANIPULACJA': {
+                colorClass: 'text-purple-400',
+                bgClass: 'bg-purple-950/60 border-purple-800/50',
+                badgeBg: 'bg-purple-500',
+                icon: 'fa-mask'
+            }
+        };
+
+        // Render Functions
+        function calculateStats() {
+            const total = quotes.length;
+            const counts = {
+                'PRAWDA': 0,
+                'FAŁSZ': 0,
+                'PÓŁPRAWDA': 0,
+                'MANIPULACJA': 0
+            };
+
+            quotes.forEach(q => {
+                if (counts[q.rating] !== undefined) {
+                    counts[q.rating]++;
+                }
+            });
+
+            document.getElementById('totalCount').innerText = total;
+
+            // Helper to compute percentage
+            const getPct = (cnt) => total > 0 ? Math.round((cnt / total) * 100) : 0;
+
+            // Update DOM Counts & Bars
+            document.getElementById('countPrawda').innerText = counts['PRAWDA'];
+            document.getElementById('countFalsz').innerText = counts['FAŁSZ'];
+            document.getElementById('countPolprawda').innerText = counts['PÓŁPRAWDA'];
+            document.getElementById('countManipulacja').innerText = counts['MANIPULACJA'];
+
+            document.getElementById('pctPrawda').innerText = `${getPct(counts['PRAWDA'])}%`;
+            document.getElementById('pctFalsz').innerText = `${getPct(counts['FAŁSZ'])}%`;
+            document.getElementById('pctPolprawda').innerText = `${getPct(counts['PÓŁPRAWDA'])}%`;
+            document.getElementById('pctManipulacja').innerText = `${getPct(counts['MANIPULACJA'])}%`;
+
+            document.getElementById('barPrawda').style.width = `${getPct(counts['PRAWDA'])}%`;
+            document.getElementById('barFalsz').style.width = `${getPct(counts['FAŁSZ'])}%`;
+            document.getElementById('barPolprawda').style.width = `${getPct(counts['PÓŁPRAWDA'])}%`;
+            document.getElementById('barManipulacja').style.width = `${getPct(counts['MANIPULACJA'])}%`;
+
+            // Overall truth index
+            const truthRate = getPct(counts['PRAWDA']);
+            document.getElementById('truthRatePercentage').innerText = `${truthRate}%`;
+            document.getElementById('truthRateBar').style.width = `${truthRate}%`;
+        }
+
+        function renderCards() {
+            const container = document.getElementById('cardsContainer');
+            const emptyState = document.getElementById('emptyState');
+
+            // Filter logic
+            const filtered = quotes.filter(q => {
+                const matchesFilter = currentFilter === 'ALL' || q.rating === currentFilter;
+                const matchesSearch = q.quote.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      q.context.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      q.reason.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesFilter && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            container.innerHTML = filtered.map(q => {
+                const conf = ratingConfig[q.rating] || ratingConfig['MANIPULACJA'];
+                return `
+                    <div class="bg-darkCard border border-darkBorder rounded-xl p-6 flex flex-col justify-between card-hover relative overflow-hidden">
+                        <!-- Left rating color strip -->
+                        <div class="absolute left-0 top-0 bottom-0 w-1.5 ${conf.badgeBg}"></div>
+
+                        <div>
+                            <!-- Header: Rating & Context -->
+                            <div class="flex items-start justify-between gap-3 mb-4 pl-2">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider border ${conf.bgClass} ${conf.colorClass}">
+                                    <i class="fa-solid ${conf.icon}"></i>
+                                    ${q.rating}
+                                </span>
+                                <span class="text-xs text-gray-500 flex items-center gap-1">
+                                    <i class="fa-regular fa-calendar text-gray-600"></i> ${q.date}
+                                </span>
+                            </div>
+
+                            <!-- Quote -->
+                            <blockquote class="text-lg font-semibold text-white pl-2 mb-3 leading-snug italic border-l-2 border-gray-700">
+                                "${escapeHtml(q.quote)}"
+                            </blockquote>
+
+                            <!-- Context -->
+                            <p class="text-xs text-gray-400 pl-2 mb-4 flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-red-500/70"></i>
+                                Kontekst: <span class="text-gray-300 font-medium">${escapeHtml(q.context)}</span>
+                            </p>
+                        </div>
+
+                        <!-- Fact Check Justification -->
+                        <div class="mt-4 pt-4 border-t border-darkBorder/60 bg-darkBg/50 -mx-6 -mb-6 p-4 rounded-b-xl">
+                            <div class="text-xs font-bold uppercase tracking-wider text-purple-400 mb-1 flex items-center gap-1">
+                                <i class="fa-solid fa-file-contract"></i> Analiza Redakcji:
+                            </div>
+                            <p class="text-xs text-gray-300 leading-relaxed">
+                                ${escapeHtml(q.reason)}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Helper Escaper
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;")
+                      .replace(/</g, "&lt;")
+                      .replace(/>/g, "&gt;")
+                      .replace(/"/g, "&quot;")
+                      .replace(/'/g, "&#039;");
+        }
+
+        // Show Custom Toast
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').innerText = title;
+            document.getElementById('toastMessage').innerText = message;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            calculateStats();
+            renderCards();
+
+            // Search input binding
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                renderCards();
+            });
+
+            // Filter button bindings
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('bg-red-800', 'text-white', 'active');
+                        b.classList.add('bg-darkBg', 'text-gray-300');
+                    });
+                    btn.classList.remove('bg-darkBg', 'text-gray-300');
+                    btn.classList.add('bg-red-800', 'text-white', 'active');
+
+                    currentFilter = btn.getAttribute('data-filter');
+                    renderCards();
+                });
+            });
+
+            // Form Submit binding
+            document.getElementById('addQuoteForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const text = document.getElementById('quoteText').value.trim();
+                const context = document.getElementById('quoteContext').value.trim();
+                const rating = document.getElementById('quoteRating').value;
+                const reason = document.getElementById('quoteReason').value.trim();
+
+                if (!text || !context || !reason) return;
+
+                const today = new Date().toISOString().split('T')[0];
+
+                const newQuote = {
+                    id: Date.now(),
+                    quote: text,
+                    context: context,
+                    date: today,
+                    rating: rating,
+                    reason: reason
+                };
+
+                quotes.unshift(newQuote);
+                calculateStats();
+                renderCards();
+
+                // Reset form
+                e.target.reset();
+
+                // Show feedback toast
+                showToast("Dodano wypowiedź!", "Zweryfikowany cytat Pana Ciemności trafił na listę.");
+            });
+        });
+    </script>
+</body>
+</html>
