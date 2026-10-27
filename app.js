@@ -13,7 +13,7 @@ const dbFetch = (path, opts = {}) => fetch(`${DB.url}/rest/v1/${path}`, {
 const DRAFT_KEY = 'demagog_trio_draft_v1';
 const LIKES_KEY = 'demagog_trio_likes_v1';
 const PEOPLE = ['Kacper', 'Łukasz', 'Damian'];
-const CATEGORIES = ['Gry', 'Minecraft', 'League of Legends', 'Życie', 'Mechanika'];
+const CATEGORIES = ['Gry', 'Życie'];
 const WEIGHTS = { 'PRAWDA': 1, 'PÓŁPRAWDA': 0.5 };
 const STAT_IDS = { 'PRAWDA': 'Prawda', 'PÓŁPRAWDA': 'Polprawda', 'MANIPULACJA': 'Manipulacja', 'FAŁSZ': 'Falsz', 'FAŁSZ OSTATECZNY': 'FalszOstateczny' };
 const PROFILE_IDS = { 'Kacper': 'kacper', 'Łukasz': 'lukasz', 'Damian': 'damian' };
@@ -290,6 +290,23 @@ function triggerEyeOfTruth() {
     }, 1800);
 }
 
+// ---------- Automatyczne odświeżanie (gdy działa baza) ----------
+async function pollQuotes() {
+    if (document.hidden) return;
+    try {
+        const r = await dbFetch('quotes?select=*&approved=eq.true&order=date.desc');
+        if (!r.ok) return;
+        const d = await r.json();
+        if (!Array.isArray(d)) return;
+        const next = clean(d).ok;
+        if (JSON.stringify(next) !== JSON.stringify(quotes)) { quotes = next; refresh(); }
+    } catch { /* brak sieci – spróbujemy za chwilę */ }
+}
+function startPolling() {
+    setInterval(pollQuotes, 20000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) pollQuotes(); });
+}
+
 // ---------- Start ----------
 document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('.admin-only').forEach(el => { if (DB || !isAdmin) el.remove(); });
@@ -308,6 +325,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     setPersonFilter('ALL');
     setActive('.verdict-filter-btn', 'data-filter-verdict', 'ALL', VERDICT_ON, 'bg-darkBg text-gray-300');
     setActive('.cat-filter-btn', 'data-filter-cat', 'ALL', CAT_ON, 'bg-darkBg text-gray-400');
+    if (DB) startPolling();
 
     document.querySelectorAll('.person-tab-btn').forEach(b => b.addEventListener('click', () => setPersonFilter(b.dataset.personSelect)));
     document.querySelectorAll('.verdict-filter-btn').forEach(b => b.addEventListener('click', () => {
