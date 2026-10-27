@@ -259,13 +259,13 @@ function setPersonFilter(person) {
 }
 
 let toastTimer;
-function showToast(title, message) {
+function showToast(title, message, ms = 3500) {
     const toast = $('toast');
     $('toastTitle').textContent = title;
     $('toastMessage').textContent = message;
     toast.classList.remove('translate-y-24', 'opacity-0');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 3500);
+    toastTimer = setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), ms);
 }
 
 function triggerEyeOfTruth() {
@@ -342,18 +342,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
         if (!clean([q]).ok.length) { showToast('Błąd', 'Uzupełnij wszystkie pola.'); return; }
         if (DB) {
-            if ($('website')?.value) return; // pułapka na boty
+            if ($('hp_contact')?.value) return; // pułapka na boty
             if (Date.now() - (Number(store.get(COOLDOWN_KEY)) || 0) < 30000) {
                 showToast('Chwila…', 'Odczekaj 30 sekund przed kolejnym zgłoszeniem.'); return;
             }
             const { id, likes, ...payload } = q;
             try {
                 const r = await dbFetch('quotes', { method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify(payload) });
-                if (!r.ok) throw new Error(r.status);
+                if (!r.ok) { const err = await r.json().catch(() => ({})); throw new Error(`Kod ${r.status}: ${err.message || 'nieznany błąd'}`); }
                 store.set(COOLDOWN_KEY, Date.now());
                 e.target.reset(); $('quoteDate').value = today();
                 showToast('Wysłano!', 'Wpis pojawi się na stronie po akceptacji.');
-            } catch { showToast('Nie udało się wysłać', 'Spróbuj ponownie za chwilę.'); }
+            } catch (err) { console.error(err); showToast('Nie udało się wysłać', String(err.message || 'Spróbuj ponownie.'), 12000); }
             return;
         }
         if (!isAdmin) { showToast('Dodawanie wyłączone', 'Brak konfiguracji bazy w config.js.'); return; }
