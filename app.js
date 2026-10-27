@@ -291,14 +291,10 @@ function triggerEyeOfTruth() {
 
 // ---------- Start ----------
 document.addEventListener('DOMContentLoaded', async () => {
-    document.querySelectorAll('.admin-only').forEach(el => {
-        const isForm = el.matches('#submit, a[href="#submit"]');
-        if (DB ? !isForm : !isAdmin) el.remove(); // z bazą: formularz dla wszystkich, panel lokalny znika
-    });
-    if (DB) {
-        const note = document.querySelector('#submit p');
-        if (note) note.textContent = 'Wybierz osobę, wpisz cytat, kontekst i uzasadnienie. Wpis pojawi się na stronie po akceptacji administratora.';
-    }
+    document.querySelectorAll('.admin-only').forEach(el => { if (DB || !isAdmin) el.remove(); });
+    const note = document.querySelector('#submit p');
+    if (note && DB) note.textContent = 'Wybierz osobę, wpisz cytat, kontekst i uzasadnienie. Wpis pojawi się na stronie po akceptacji administratora.';
+    else if (note && !isAdmin) note.textContent = 'Dodawanie cytatów jest wyłączone: strona nie widzi konfiguracji bazy (uzupełnij config.js).';
 
     // powiąż <label> z polami (dostępność)
     document.querySelectorAll('label').forEach(l => {
@@ -360,6 +356,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             } catch { showToast('Nie udało się wysłać', 'Spróbuj ponownie za chwilę.'); }
             return;
         }
+        if (!isAdmin) { showToast('Dodawanie wyłączone', 'Brak konfiguracji bazy w config.js.'); return; }
         quotes.unshift(q);
         persist(); refresh();
         e.target.reset();
