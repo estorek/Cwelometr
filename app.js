@@ -2,6 +2,13 @@
 
 // Tryb admina: otwórz stronę z ?admin=1 (to wygoda, nie zabezpieczenie – patrz README).
 const isAdmin = new URLSearchParams(location.search).has('admin');
+const DB = (typeof SUPABASE_URL === 'string' && /^https:\/\//.test(SUPABASE_URL) && typeof SUPABASE_KEY === 'string' && SUPABASE_KEY)
+    ? { url: SUPABASE_URL.replace(/\/$/, ''), key: SUPABASE_KEY } : null;
+const canEdit = isAdmin && !DB; // przy włączonej bazie moderacja odbywa się w panelu Supabase
+const COOLDOWN_KEY = 'demagog_trio_last_submit';
+const dbFetch = (path, opts = {}) => fetch(`${DB.url}/rest/v1/${path}`, {
+    ...opts, headers: { apikey: DB.key, 'Content-Type': 'application/json', ...opts.headers }
+});
 const DRAFT_KEY = 'demagog_trio_draft_v1';
 const LIKES_KEY = 'demagog_trio_likes_v1';
 const PEOPLE = ['Kacper', 'Łukasz', 'Damian'];
@@ -65,12 +72,15 @@ const nextId = () => Math.max(0, ...quotes.map(q => q.id)) + 1;
 async function loadQuotes() {
     let published = [];
     try {
-        const r = await fetch('quotes.json', { cache: 'no-cache' });
+        const r = DB ? await dbFetch('quotes?select=*&approved=eq.true&order=date.desc')
+                     : await fetch('quotes.json', { cache: 'no-cache' });
         if (r.ok) { const d = await r.json(); if (Array.isArray(d)) published = clean(d).ok; }
+        else if (DB) showToast('Błąd bazy', `Supabase zwróciło kod ${r.status}.`);
     } catch {
-        if (location.protocol === 'file:') showToast('Brak quotes.json', 'Otwórz stronę przez serwer (GitHub Pages lub python -m http.server).');
+        showToast(DB ? 'Brak połączenia z bazą' : 'Brak quotes.json',
+                  location.protocol === 'file:' ? 'Otwórz stronę przez serwer (GitHub Pages lub python -m http.server).' : 'Spróbuj odświeżyć stronę.');
     }
-    const draft = isAdmin ? store.get(DRAFT_KEY) : null;
+    const draft = canEdit ? store.get(DRAFT_KEY) : null;
     quotes = Array.isArray(draft) ? clean(draft).ok : published;
     liked = new Set((store.get(LIKES_KEY) || []).filter(Number.isInteger));
 }
@@ -78,7 +88,7 @@ function persist() {
     if (!store.set(DRAFT_KEY, quotes)) showToast('Błąd zapisu', 'Przeglądarka blokuje localStorage – zmiany nie zostaną zapamiętane.');
 }
 const refresh = () => { calculateStats(); renderCards(); };
-const likeCount = q => (q.likes || 0) + (liked.has(q.id) ? 1 : 0);
+const likeCount = q => (q.likes || 0) + (!DB && liked.has(q.id) ? 1 : 0);
 
 // ---------- Statystyki ----------
 function calculateStats() {
@@ -124,7 +134,7 @@ function calculateStats() {
 // ---------- Renderowanie ----------
 function cardHtml(q, isOpen) {
     const conf = RATING_CONFIG[q.rating], p = PERSON_CONFIG[q.person], id = q.id, isLiked = liked.has(id);
-    const adminBtns = isAdmin ? `
+    const adminBtns = canEdit ? `
         <button data-action="edit" data-id="${id}" class="hover:text-purple-400 p-1 transition-colors" title="Edytuj" aria-label="Edytuj wypowiedź"><i class="fa-solid fa-pen text-xs"></i></button>
         <button data-action="delete" data-id="${id}" class="hover:text-red-400 p-1 transition-colors" title="Usuń" aria-label="Usuń wypowiedź"><i class="fa-solid fa-trash text-xs"></i></button>` : '';
     return `
@@ -189,8 +199,14 @@ async function copyText(text) {
 }
 const actions = {
     like(id) {
-        liked.has(id) ? liked.delete(id) : liked.add(id);
+        const was = liked.has(id);
+        was ? liked.delete(id) : liked.add(id);
         store.set(LIKES_KEY, [...liked]);
+        const q = quotes.find(x => x.id === id);
+        if (DB && q) {
+            q.likes = Math.max(0, q.likes + (was ? -1 : 1));
+            dbFetch('rpc/like_quote', { method: 'POST', body: JSON.stringify({ qid: id, delta: was ? -1 : 1 }) }).catch(() => {});
+        }
         renderCards();
     },
     async copy(id) {
@@ -200,7 +216,7 @@ const actions = {
         showToast(ok ? 'Skopiowano!' : 'Nie udało się skopiować', ok ? 'Cytat jest w schowku.' : 'Zaznacz tekst i skopiuj ręcznie.');
     },
     edit(id) {
-        if (!isAdmin) return;
+        if (!canEdit) return;
         const q = quotes.find(x => x.id === id);
         if (!q) return;
         $('editQuoteId').value = q.id;
@@ -215,7 +231,7 @@ const actions = {
         $('editQuoteText').focus();
     },
     delete(id) {
-        if (!isAdmin || !confirm('Czy na pewno chcesz usunąć ten cytat?')) return;
+        if (!canEdit || !confirm('Czy na pewno chcesz usunąć ten cytat?')) return;
         quotes = quotes.filter(q => q.id !== id);
         persist(); refresh();
         showToast('Usunięto', 'Cytat został usunięty ze szkicu.');
@@ -275,7 +291,14 @@ function triggerEyeOfTruth() {
 
 // ---------- Start ----------
 document.addEventListener('DOMContentLoaded', async () => {
-    if (!isAdmin) document.querySelectorAll('.admin-only').forEach(el => el.remove());
+    document.querySelectorAll('.admin-only').forEach(el => {
+        const isForm = el.matches('#submit, a[href="#submit"]');
+        if (DB ? !isForm : !isAdmin) el.remove(); // z bazą: formularz dla wszystkich, panel lokalny znika
+    });
+    if (DB) {
+        const note = document.querySelector('#submit p');
+        if (note) note.textContent = 'Wybierz osobę, wpisz cytat, kontekst i uzasadnienie. Wpis pojawi się na stronie po akceptacji administratora.';
+    }
 
     // powiąż <label> z polami (dostępność)
     document.querySelectorAll('label').forEach(l => {
@@ -314,7 +337,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     // Admin
-    on('addQuoteForm', 'submit', e => {
+    on('addQuoteForm', 'submit', async e => {
         e.preventDefault();
         const q = {
             id: nextId(), person: $('quotePerson').value, category: $('quoteCategory').value,
@@ -322,6 +345,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             rating: $('quoteRating').value, date: $('quoteDate').value, reason: $('quoteReason').value.trim(), likes: 0
         };
         if (!clean([q]).ok.length) { showToast('Błąd', 'Uzupełnij wszystkie pola.'); return; }
+        if (DB) {
+            if ($('website')?.value) return; // pułapka na boty
+            if (Date.now() - (Number(store.get(COOLDOWN_KEY)) || 0) < 30000) {
+                showToast('Chwila…', 'Odczekaj 30 sekund przed kolejnym zgłoszeniem.'); return;
+            }
+            const { id, likes, ...payload } = q;
+            try {
+                const r = await dbFetch('quotes', { method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify(payload) });
+                if (!r.ok) throw new Error(r.status);
+                store.set(COOLDOWN_KEY, Date.now());
+                e.target.reset(); $('quoteDate').value = today();
+                showToast('Wysłano!', 'Wpis pojawi się na stronie po akceptacji.');
+            } catch { showToast('Nie udało się wysłać', 'Spróbuj ponownie za chwilę.'); }
+            return;
+        }
         quotes.unshift(q);
         persist(); refresh();
         e.target.reset();
