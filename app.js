@@ -4,6 +4,7 @@
 const isAdmin = new URLSearchParams(location.search).has('admin');
 const DB = (typeof SUPABASE_URL === 'string' && /^https:\/\//.test(SUPABASE_URL) && typeof SUPABASE_KEY === 'string' && SUPABASE_KEY)
     ? { url: SUPABASE_URL.replace(/\/$/, ''), key: SUPABASE_KEY } : null;
+const AUTO = DB && typeof AUTO_APPROVE !== 'undefined' && AUTO_APPROVE === true; // musi pasować do reguł w bazie
 const canEdit = isAdmin && !DB; // przy włączonej bazie moderacja odbywa się w panelu Supabase
 const COOLDOWN_KEY = 'demagog_trio_last_submit';
 const dbFetch = (path, opts = {}) => fetch(`${DB.url}/rest/v1/${path}`, {
@@ -293,7 +294,7 @@ function triggerEyeOfTruth() {
 document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('.admin-only').forEach(el => { if (DB || !isAdmin) el.remove(); });
     const note = document.querySelector('#submit p');
-    if (note && DB) note.textContent = 'Wybierz osobę, wpisz cytat, kontekst i uzasadnienie. Wpis pojawi się na stronie po akceptacji administratora.';
+    if (note && DB) note.textContent = 'Wybierz osobę, wpisz cytat, kontekst i uzasadnienie. ' + (AUTO ? 'Wpis pojawi się na stronie od razu.' : 'Wpis pojawi się na stronie po akceptacji administratora.');
     else if (note && !isAdmin) note.textContent = 'Dodawanie cytatów jest wyłączone: strona nie widzi konfiguracji bazy (uzupełnij config.js).';
 
     // powiąż <label> z polami (dostępność)
@@ -352,7 +353,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (!r.ok) { const err = await r.json().catch(() => ({})); throw new Error(`Kod ${r.status}: ${err.message || 'nieznany błąd'}`); }
                 store.set(COOLDOWN_KEY, Date.now());
                 e.target.reset(); $('quoteDate').value = today();
-                showToast('Wysłano!', 'Wpis pojawi się na stronie po akceptacji.');
+                if (AUTO) { await loadQuotes(); refresh(); }
+                showToast('Wysłano!', AUTO ? 'Wpis jest już na stronie.' : 'Wpis pojawi się na stronie po akceptacji.');
             } catch (err) { console.error(err); showToast('Nie udało się wysłać', String(err.message || 'Spróbuj ponownie.'), 12000); }
             return;
         }
