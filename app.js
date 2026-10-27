@@ -269,26 +269,41 @@ function showToast(title, message, ms = 3500) {
     toastTimer = setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), ms);
 }
 
-function triggerEyeOfTruth() {
-    const overlay = $('eyeOverlay');
-    overlay.classList.remove('hidden');
+let lastEyeId = null;
+function eyeSound() {
     try {
         const ctx = new (window.AudioContext || window.webkitAudioContext)();
         const osc = ctx.createOscillator(), gain = ctx.createGain(), t = ctx.currentTime;
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(220, t);
-        osc.frequency.exponentialRampToValueAtTime(60, t + 1.2);
-        gain.gain.setValueAtTime(0.35, t);
-        gain.gain.exponentialRampToValueAtTime(0.01, t + 1.2);
+        osc.frequency.exponentialRampToValueAtTime(60, t + 0.6);
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.exponentialRampToValueAtTime(0.01, t + 0.6);
         osc.connect(gain); gain.connect(ctx.destination);
         osc.onended = () => ctx.close();
-        osc.start(); osc.stop(t + 1.2);
+        osc.start(); osc.stop(t + 0.6);
     } catch { /* audio niedostępne */ }
-    setTimeout(() => {
-        overlay.classList.add('hidden');
-        showToast('Oko Prawdy', 'Aura Kacpra, Łukasza i Damiana została prześwietlona.');
-    }, 1800);
 }
+function triggerEyeOfTruth() {
+    const pool = selectedPerson === 'ALL' ? quotes : quotes.filter(q => q.person === selectedPerson);
+    if (!pool.length) { showToast('Oko Prawdy', 'Brak cytatów do wylosowania.'); return; }
+    const choices = pool.length > 1 ? pool.filter(q => q.id !== lastEyeId) : pool;
+    const q = choices[Math.floor(Math.random() * choices.length)];
+    lastEyeId = q.id;
+    const conf = RATING_CONFIG[q.rating], p = PERSON_CONFIG[q.person];
+    $('eyeScope').textContent = selectedPerson === 'ALL' ? 'Wszyscy' : selectedPerson;
+    $('eyeBody').innerHTML = `
+        <div class="flex items-center gap-2 flex-wrap mb-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded border text-xs font-bold uppercase tracking-wider ${p.badgeClass}"><i class="fa-solid ${p.icon}"></i> ${esc(q.person)}</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-bold uppercase tracking-wider border ${conf.bgClass} ${conf.colorClass}"><i class="fa-solid ${conf.icon}"></i> ${esc(q.rating)}</span>
+        </div>
+        <blockquote class="text-lg sm:text-xl font-semibold text-white italic leading-snug border-l-2 border-purple-700/60 pl-3">„${esc(q.quote)}”</blockquote>
+        <p class="text-xs text-gray-400 mt-3">${esc(q.context)} · <span class="font-mono">${esc(q.date)}</span></p>
+        <div class="mt-3 text-xs text-gray-300 leading-relaxed bg-darkBg/60 p-3 rounded-xl border border-darkBorder/60"><strong class="text-purple-300">Uzasadnienie:</strong> ${esc(q.reason)}</div>`;
+    $('eyeOverlay').classList.remove('hidden');
+    eyeSound();
+}
+const closeEye = () => $('eyeOverlay').classList.add('hidden');
 
 // ---------- Automatyczne odświeżanie (gdy działa baza) ----------
 async function pollQuotes() {
@@ -349,7 +364,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     on('closeModalBtn', 'click', closeModal);
     on('cancelEditBtn', 'click', closeModal);
     on('editModal', 'click', e => { if (e.target === $('editModal')) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeEye(); } });
+    on('eyeCloseBtn', 'click', closeEye);
+    on('eyeAgainBtn', 'click', triggerEyeOfTruth);
+    on('eyeOverlay', 'click', e => { if (e.target === $('eyeOverlay')) closeEye(); });
 
     // Admin
     on('addQuoteForm', 'submit', async e => {
