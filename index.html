@@ -2,16 +2,18 @@
 <html lang="pl" class="dark">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Archiwum fact-checkingowe: Kacper, Łukasz i Damian.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEMAGOG: Pan Ciemności Edition | Fact-Checker Kacpra</title>
+    <title>DEMAGOG: Trio Mroku - Kacper, Łukasz & Damian</title>
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -19,9 +21,12 @@
             theme: {
                 extend: {
                     colors: {
-                        darkBg: '#0b0c10',
-                        darkCard: '#12141c',
-                        darkBorder: '#232736',
+                        darkBg: '#08080c',
+                        darkCard: '#10121a',
+                        darkBorder: '#1e2230',
+                        gothPurple: '#581c87',
+                        gothCrimson: '#991b1b',
+                        gothEmerald: '#065f46',
                         truth: '#10b981',
                         falsehood: '#ef4444',
                         halfTruth: '#f59e0b',
@@ -36,291 +41,406 @@
             }
         }
     </script>
-    <style>
-        body {
-            background-color: #0b0c10;
-            color: #e5e7eb;
-            font-family: 'Inter', sans-serif;
-        }
-        .gothic-title {
-            font-family: 'Cinzel', serif;
-        }
-        .glow-red {
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.25);
-        }
-        .glow-purple {
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
-        }
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(168, 85, 247, 0.2);
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0b0c10;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #232736;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #dc2626;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-red-900 selection:text-white">
 
-    <!-- Header -->
-    <header class="border-b border-darkBorder bg-darkCard/90 backdrop-blur-md sticky top-0 z-50">
+    <!-- Header Navigation -->
+    <header class="border-b border-darkBorder bg-darkCard/90 backdrop-blur-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-900 via-purple-950 to-black flex items-center justify-center border border-red-800/50 shadow-lg glow-red">
-                    <i class="fa-solid fa-skull text-red-500 text-2xl"></i>
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-red-950 via-purple-950 to-emerald-950 flex items-center justify-center border border-purple-800/60 shadow-lg glow-purple relative overflow-hidden">
+                    <i class="fa-solid fa-skull text-red-500 text-2xl relative z-10"></i>
                 </div>
                 <div>
-                    <h1 class="gothic-title text-lg sm:text-2xl font-bold tracking-wider text-white flex items-center gap-2">
-                        DEMAGOG <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded bg-red-950 text-red-400 border border-red-800/50 uppercase tracking-widest font-sans">Pan Ciemności Edition</span>
+                    <h1 class="gothic-title text-base sm:text-2xl font-bold tracking-wider text-white flex items-center gap-2">
+                        DEMAGOG <span class="text-[11px] sm:text-xs px-2.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800/60 uppercase tracking-widest font-sans font-bold">Trio Mroku</span>
                     </h1>
-                    <p class="text-xs text-gray-400 hidden sm:block">GitHub Pages • Archiwum i weryfikator wypowiedzi Kacpra</p>
+                    <p class="text-[11px] text-gray-400 hidden sm:block">Fakt-Checking: Kacper, Łukasz &amp; Damian</p>
                 </div>
             </div>
 
+            <!-- Action Buttons -->
             <div class="flex items-center space-x-2 sm:space-x-4">
-                <a href="#stats" class="text-sm font-medium text-gray-300 hover:text-red-400 transition-colors hidden md:block">Statystyki</a>
-                <a href="#quotes" class="text-sm font-medium text-gray-300 hover:text-red-400 transition-colors hidden md:block">Wypowiedzi</a>
-                <a href="#admin" class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-darkBorder hover:bg-gray-800 text-gray-300 text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-database text-purple-400 text-xs"></i> Zarządzaj danymi
+                <button id="eyeOfTruthBtn" onclick="triggerEyeOfTruth()" class="px-3 py-1.5 rounded-lg bg-amber-950/40 hover:bg-amber-900/60 border border-amber-700/60 text-amber-300 text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-eye text-amber-400 animate-pulse"></i>
+                    <span class="hidden md:inline">Oko Prawdy</span>
+                </button>
+                <a href="#stats" class="text-xs sm:text-sm font-medium text-gray-300 hover:text-red-400 transition-colors hidden md:block">Statystyki</a>
+                <a href="#quotes" class="text-xs sm:text-sm font-medium text-gray-300 hover:text-red-400 transition-colors hidden md:block">Cytaty</a>
+                <a href="#admin" class="admin-only px-3 py-1.5 rounded-lg bg-darkBorder hover:bg-gray-800 text-gray-300 text-xs sm:text-sm font-medium transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-sliders text-purple-400"></i> Admin
                 </a>
-                <a href="#submit" class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-red-800 hover:bg-red-700 text-white text-xs sm:text-sm font-medium transition-all shadow-md hover:shadow-red-900/50 flex items-center gap-1.5">
-                    <i class="fa-solid fa-plus text-xs"></i> Zgłoś
+                <a href="#submit" class="admin-only px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-gradient-to-r from-red-900 via-purple-900 to-emerald-900 hover:opacity-90 text-white text-xs sm:text-sm font-bold transition-all shadow-md flex items-center gap-1.5 border border-purple-700/50">
+                    <i class="fa-solid fa-plus text-xs"></i> Zgłoś Cytat
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden py-10 sm:py-14 bg-gradient-to-b from-darkCard to-darkBg border-b border-darkBorder">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#a855f7_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                <div class="max-w-2xl text-center md:text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-800/40 text-purple-300 text-xs font-semibold mb-4">
-                        <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
-                        Niezależny Fact-Checking • GitHub Pages Ready
-                    </div>
-                    <h2 class="gothic-title text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-                        Czy Kacper mówi prawdę?<br/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-purple-400 to-amber-500">Pan Ciemności pod lupą!</span>
-                    </h2>
-                    <p class="text-gray-400 text-sm sm:text-base mb-6 leading-relaxed">
-                        Weryfikujemy obietnice, wymówki i legendarne opowieści Kacpra. Dane zapisywane są lokalnie lub przesyłane bezpośrednio do moderatora przez integrację Web3Forms/Formspree.
-                    </p>
-                    <div class="flex flex-wrap gap-3 justify-center md:justify-start">
-                        <div class="px-3 py-2 rounded-lg bg-darkBg/80 border border-darkBorder flex items-center gap-2.5">
-                            <i class="fa-solid fa-user-shield text-purple-400 text-lg"></i>
-                            <div class="text-left">
-                                <div class="text-[10px] text-gray-400">Podmiot badań</div>
-                                <div class="text-xs font-bold text-white">Kacper "Pan Ciemności"</div>
-                            </div>
-                        </div>
-                        <div class="px-3 py-2 rounded-lg bg-darkBg/80 border border-darkBorder flex items-center gap-2.5">
-                            <i class="fa-solid fa-hard-drive text-red-400 text-lg"></i>
-                            <div class="text-left">
-                                <div class="text-[10px] text-gray-400">Tryb Zapisu</div>
-                                <div class="text-xs font-bold text-emerald-400" id="storageStatusBadge">localStorage + API</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Avatar Card -->
-                <div class="relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-red-600 via-purple-600 to-amber-600 rounded-2xl blur opacity-30 group-hover:opacity-70 transition duration-1000"></div>
-                    <div class="relative w-60 h-60 sm:w-68 sm:h-68 rounded-2xl bg-darkCard border border-darkBorder flex flex-col items-center justify-center p-6 text-center shadow-2xl">
-                        <div class="w-24 h-24 rounded-full bg-gradient-to-b from-gray-800 to-black border-2 border-red-700 flex items-center justify-center mb-3 relative overflow-hidden shadow-inner">
-                            <i class="fa-solid fa-user-ninja text-5xl text-gray-300"></i>
-                            <div class="absolute inset-0 bg-red-900/10"></div>
-                        </div>
-                        <h3 class="gothic-title text-lg font-bold text-white">Pan Ciemności</h3>
-                        <p class="text-xs text-red-400 font-mono mt-1">Wskaźnik Prawdomówności: <span id="truthRatePercentage" class="font-bold">0%</span></p>
-                        <div class="w-full bg-gray-800 h-2 rounded-full mt-3 overflow-hidden">
-                            <div id="truthRateBar" class="bg-gradient-to-r from-red-600 via-amber-500 to-emerald-500 h-full transition-all duration-1000" style="width: 0%"></div>
-                        </div>
-                    </div>
-                </div>
+    <!-- Global Person Selector Switcher -->
+    <section class="bg-darkBg/95 border-b border-darkBorder sticky top-20 z-30 backdrop-blur-md py-3 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between flex-wrap gap-3">
+            <span class="text-xs font-bold uppercase tracking-widest text-purple-300 flex items-center gap-2">
+                <i class="fa-solid fa-user-check text-purple-400"></i> Wybór Osoby do podglądu:
+            </span>
+            <div class="flex items-center gap-2 flex-wrap">
+                <button data-person-select="ALL" class="person-tab-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-red-900 via-purple-900 to-emerald-900 text-white border border-purple-500 shadow-lg">
+                    <i class="fa-solid fa-users mr-1.5"></i> Wszyscy (Trio)
+                </button>
+                <button data-person-select="Kacper" class="person-tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-darkCard text-gray-400 hover:text-white border border-darkBorder hover:border-red-600">
+                    <i class="fa-solid fa-skull text-red-500 mr-1.5"></i> Kacper "Pan Ciemności"
+                </button>
+                <button data-person-select="Łukasz" class="person-tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-darkCard text-gray-400 hover:text-white border border-darkBorder hover:border-purple-600">
+                    <i class="fa-solid fa-ghost text-purple-400 mr-1.5"></i> Łukasz "Mistrz Uników"
+                </button>
+                <button data-person-select="Damian" class="person-tab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-darkCard text-gray-400 hover:text-white border border-darkBorder hover:border-emerald-600">
+                    <i class="fa-solid fa-bolt text-emerald-400 mr-1.5"></i> Damian "Lord Chaosu"
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- Profiles Overview Cards Grid -->
+    <section class="py-8 sm:py-12 border-b border-darkBorder bg-darkCard/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Kacper Card -->
+                <div id="profileCardKacper" onclick="setPersonFilter('Kacper')" class="cursor-pointer relative group rounded-2xl bg-darkCard border border-red-900/50 p-5 shadow-xl transition-all hover:border-red-500 hover:scale-[1.02]">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-red-950 to-black border-2 border-red-600 flex items-center justify-center shrink-0 shadow-lg glow-crimson">
+                            <i class="fa-solid fa-skull text-3xl text-red-400"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <h3 class="gothic-title text-lg font-bold text-white">Kacper</h3>
+                                <span class="text-[11px] bg-red-950 text-red-300 px-2 py-0.5 rounded border border-red-800 font-sans font-bold">Pan Ciemności</span>
+                            </div>
+                            <p class="text-xs text-red-400/80 mt-0.5">Arcymag Mroku IX</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between font-semibold">
+                            <span class="text-gray-400">Prawdomówność:</span>
+                            <span id="kacperTruthRate" class="text-emerald-400 font-bold">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                            <div id="kacperTruthBar" class="bg-gradient-to-r from-red-600 to-emerald-500 h-full transition-all duration-700" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-gray-400 pt-1">
+                            <span>Wypowiedzi w bazie: <strong id="kacperQuoteCount" class="text-gray-300">0</strong></span>
+                            <span>Gry / LoL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Łukasz Card -->
+                <div id="profileCardLukasz" onclick="setPersonFilter('Łukasz')" class="cursor-pointer relative group rounded-2xl bg-darkCard border border-purple-900/50 p-5 shadow-xl transition-all hover:border-purple-500 hover:scale-[1.02]">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-950 to-black border-2 border-purple-600 flex items-center justify-center shrink-0 shadow-lg glow-purple">
+                            <i class="fa-solid fa-ghost text-3xl text-purple-400"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <h3 class="gothic-title text-lg font-bold text-white">Łukasz</h3>
+                                <span class="text-[11px] bg-purple-950 text-purple-300 px-2 py-0.5 rounded border border-purple-800 font-sans font-bold">Mistrz Uników</span>
+                            </div>
+                            <p class="text-xs text-purple-400/80 mt-0.5">Cień Przeznaczenia</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between font-semibold">
+                            <span class="text-gray-400">Prawdomówność:</span>
+                            <span id="lukaszTruthRate" class="text-emerald-400 font-bold">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                            <div id="lukaszTruthBar" class="bg-gradient-to-r from-purple-600 to-emerald-500 h-full transition-all duration-700" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-gray-400 pt-1">
+                            <span>Wypowiedzi w bazie: <strong id="lukaszQuoteCount" class="text-gray-300">0</strong></span>
+                            <span>Minecraft / Życie</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Damian Card -->
+                <div id="profileCardDamian" onclick="setPersonFilter('Damian')" class="cursor-pointer relative group rounded-2xl bg-darkCard border border-emerald-900/50 p-5 shadow-xl transition-all hover:border-emerald-500 hover:scale-[1.02]">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-950 to-black border-2 border-emerald-600 flex items-center justify-center shrink-0 shadow-lg glow-emerald">
+                            <i class="fa-solid fa-bolt text-3xl text-emerald-400"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <h3 class="gothic-title text-lg font-bold text-white">Damian</h3>
+                                <span class="text-[11px] bg-emerald-950 text-emerald-300 px-2 py-0.5 rounded border border-emerald-800 font-sans font-bold">Lord Chaosu</span>
+                            </div>
+                            <p class="text-xs text-emerald-400/80 mt-0.5">Niszczyciel Ładu</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between font-semibold">
+                            <span class="text-gray-400">Prawdomówność:</span>
+                            <span id="damianTruthRate" class="text-emerald-400 font-bold">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
+                            <div id="damianTruthBar" class="bg-gradient-to-r from-emerald-600 to-amber-500 h-full transition-all duration-700" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-gray-400 pt-1">
+                            <span>Wypowiedzi w bazie: <strong id="damianQuoteCount" class="text-gray-300">0</strong></span>
+                            <span>Mechanika / Gry</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote of the Day Spotlight -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-5 relative z-20">
+        <div class="bg-gradient-to-r from-purple-950/90 via-darkCard to-red-950/90 border border-purple-800/60 rounded-2xl p-4 sm:p-6 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-star text-amber-400 text-xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-800/40">Cytat Dnia</span>
+                        <span id="qotdPersonBadge" class="text-[11px] font-bold px-2 py-0.5 rounded bg-purple-900 text-purple-200">Kacper</span>
+                    </div>
+                    <p class="text-sm sm:text-base font-semibold text-white italic mt-1" id="qotdText">"Ładowanie cytatu..."</p>
+                    <p class="text-xs text-gray-400 mt-0.5" id="qotdContext">Kontekst</p>
+                </div>
+            </div>
+            <div class="shrink-0">
+                <span id="qotdBadge" class="px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider border">FAŁSZ</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-12">
 
         <!-- Stats Section -->
-        <section id="stats" class="scroll-mt-24">
-            <div class="flex items-center justify-between mb-6">
+        <section id="stats" class="scroll-mt-28 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-darkBorder pb-4">
                 <div>
                     <h3 class="gothic-title text-xl sm:text-2xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-chart-pie text-red-500"></i> Raport Wiarygodności
+                        <i class="fa-solid fa-chart-pie text-purple-400"></i> Statystyki Werdyktów dla: <span id="statsScopeName" class="text-purple-300 font-bold">Wszyscy</span>
                     </h3>
-                    <p class="text-xs sm:text-sm text-gray-400">Podsumowanie statystyczne wypowiedzi Kacpra</p>
+                    <p class="text-xs sm:text-sm text-gray-400">Podsumowanie wiarygodności wypowiedzi w aktywnym widoku</p>
                 </div>
-                <span class="text-xs px-3 py-1 rounded-full bg-darkCard border border-darkBorder text-gray-300">
-                    Suma: <strong id="totalCount" class="text-white">0</strong>
+                <span class="text-xs px-3 py-1.5 rounded-lg bg-darkCard border border-darkBorder text-gray-300 font-mono">
+                    Liczba wpisów: <strong id="totalCount" class="text-white font-bold">0</strong>
                 </span>
             </div>
 
-            <!-- Stats Grid -->
-            <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
+            <!-- Stats Grid Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+                
                 <!-- PRAWDA -->
-                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden">
+                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden hover:border-emerald-700/50 transition-all">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-[10px] font-bold uppercase text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded">Prawda</span>
+                        <span class="text-[11px] font-bold uppercase text-emerald-400 bg-emerald-950/80 border border-emerald-800/60 px-2 py-0.5 rounded">Prawda</span>
                         <i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
                     </div>
                     <div class="text-2xl font-bold text-white my-1" id="countPrawda">0</div>
                     <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
-                        <div id="barPrawda" class="bg-emerald-500 h-full transition-all duration-500" style="width: 0%"></div>
+                        <div id="barPrawda" class="bg-emerald-500 h-full transition-all duration-700" style="width: 0%"></div>
                     </div>
-                    <p class="text-[10px] text-gray-400 mt-2"><span id="pctPrawda">0%</span> wypowiedzi</p>
-                </div>
-
-                <!-- FAŁSZ -->
-                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden">
-                    <div class="flex justify-between items-start mb-2">
-                        <span class="text-[10px] font-bold uppercase text-red-400 bg-red-950/60 border border-red-800/40 px-2 py-0.5 rounded">Fałsz</span>
-                        <i class="fa-solid fa-circle-xmark text-red-400 text-lg"></i>
-                    </div>
-                    <div class="text-2xl font-bold text-white my-1" id="countFalsz">0</div>
-                    <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
-                        <div id="barFalsz" class="bg-red-500 h-full transition-all duration-500" style="width: 0%"></div>
-                    </div>
-                    <p class="text-[10px] text-gray-400 mt-2"><span id="pctFalsz">0%</span> wypowiedzi</p>
+                    <p class="text-[11px] text-gray-400 mt-2"><span id="pctPrawda">0%</span> udziału</p>
                 </div>
 
                 <!-- PÓŁPRAWDA -->
-                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden">
+                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden hover:border-amber-700/50 transition-all">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-[10px] font-bold uppercase text-amber-400 bg-amber-950/60 border border-amber-800/40 px-2 py-0.5 rounded">Półprawda</span>
+                        <span class="text-[11px] font-bold uppercase text-amber-400 bg-amber-950/80 border border-amber-800/60 px-2 py-0.5 rounded">Półprawda</span>
                         <i class="fa-solid fa-adjust text-amber-400 text-lg"></i>
                     </div>
                     <div class="text-2xl font-bold text-white my-1" id="countPolprawda">0</div>
                     <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
-                        <div id="barPolprawda" class="bg-amber-500 h-full transition-all duration-500" style="width: 0%"></div>
+                        <div id="barPolprawda" class="bg-amber-500 h-full transition-all duration-700" style="width: 0%"></div>
                     </div>
-                    <p class="text-[10px] text-gray-400 mt-2"><span id="pctPolprawda">0%</span> wypowiedzi</p>
+                    <p class="text-[11px] text-gray-400 mt-2"><span id="pctPolprawda">0%</span> udziału</p>
                 </div>
 
                 <!-- MANIPULACJA -->
-                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden">
+                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden hover:border-purple-700/50 transition-all">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-[10px] font-bold uppercase text-purple-400 bg-purple-950/60 border border-purple-800/40 px-2 py-0.5 rounded">Manipulacja</span>
+                        <span class="text-[11px] font-bold uppercase text-purple-400 bg-purple-950/80 border border-purple-800/60 px-2 py-0.5 rounded">Manipulacja</span>
                         <i class="fa-solid fa-mask text-purple-400 text-lg"></i>
                     </div>
                     <div class="text-2xl font-bold text-white my-1" id="countManipulacja">0</div>
                     <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
-                        <div id="barManipulacja" class="bg-purple-500 h-full transition-all duration-500" style="width: 0%"></div>
+                        <div id="barManipulacja" class="bg-purple-500 h-full transition-all duration-700" style="width: 0%"></div>
                     </div>
-                    <p class="text-[10px] text-gray-400 mt-2"><span id="pctManipulacja">0%</span> wypowiedzi</p>
+                    <p class="text-[11px] text-gray-400 mt-2"><span id="pctManipulacja">0%</span> udziału</p>
+                </div>
+
+                <!-- FAŁSZ -->
+                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden hover:border-red-700/50 transition-all">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[11px] font-bold uppercase text-red-400 bg-red-950/80 border border-red-800/60 px-2 py-0.5 rounded">Fałsz</span>
+                        <i class="fa-solid fa-circle-xmark text-red-400 text-lg"></i>
+                    </div>
+                    <div class="text-2xl font-bold text-white my-1" id="countFalsz">0</div>
+                    <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
+                        <div id="barFalsz" class="bg-red-500 h-full transition-all duration-700" style="width: 0%"></div>
+                    </div>
+                    <p class="text-[11px] text-gray-400 mt-2"><span id="pctFalsz">0%</span> udziału</p>
                 </div>
 
                 <!-- FAŁSZ OSTATECZNY -->
-                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden col-span-2 lg:col-span-1">
+                <div class="bg-darkCard border border-darkBorder rounded-xl p-4 relative overflow-hidden col-span-2 md:col-span-1 hover:border-red-900 transition-all">
                     <div class="flex justify-between items-start mb-2">
-                        <span class="text-[10px] font-bold uppercase text-red-600 bg-red-950 border border-red-900 px-2 py-0.5 rounded">Fałsz Ostateczny</span>
-                        <i class="fa-solid fa-skull-crossbones text-red-600 text-lg"></i>
+                        <span class="text-[11px] font-bold uppercase text-red-500 bg-red-950 border border-red-900 px-2 py-0.5 rounded">Fałsz Ostateczny</span>
+                        <i class="fa-solid fa-skull-crossbones text-red-500 text-lg"></i>
                     </div>
                     <div class="text-2xl font-bold text-white my-1" id="countFalszOstateczny">0</div>
                     <div class="w-full bg-gray-800 h-1.5 rounded-full mt-2 overflow-hidden">
-                        <div id="barFalszOstateczny" class="bg-red-800 h-full transition-all duration-500" style="width: 0%"></div>
+                        <div id="barFalszOstateczny" class="bg-red-800 h-full transition-all duration-700" style="width: 0%"></div>
                     </div>
-                    <p class="text-[10px] text-gray-400 mt-2"><span id="pctFalszOstateczny">0%</span> wypowiedzi</p>
+                    <p class="text-[11px] text-gray-400 mt-2"><span id="pctFalszOstateczny">0%</span> udziału</p>
                 </div>
+
             </div>
         </section>
 
-        <!-- Quotes & Search Section -->
-        <section id="quotes" class="scroll-mt-24 space-y-6">
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-darkCard border border-darkBorder p-4 rounded-xl">
-                <!-- Search Input -->
-                <div class="relative flex-1">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                    <input type="text" id="searchInput" placeholder="Szukaj w wypowiedziach, kontekście lub analizie..." class="w-full pl-10 pr-4 py-2 bg-darkBg border border-darkBorder rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500 transition-colors">
+        <!-- Quotes Section -->
+        <section id="quotes" class="scroll-mt-28 space-y-6">
+            
+            <div class="bg-darkCard border border-darkBorder p-4 sm:p-5 rounded-2xl space-y-4 shadow-md">
+                
+                <div class="flex flex-col md:flex-row gap-3 items-center justify-between">
+                    <div class="relative w-full md:w-1/2">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="searchInput" placeholder="Szukaj wypowiedzi, kontekstu lub uzasadnienia..." class="w-full pl-10 pr-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-purple-500">
+                    </div>
+
+                    <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+                        <label class="text-xs text-gray-400 whitespace-nowrap">Sortowanie:</label>
+                        <select id="sortSelect" class="bg-darkBg border border-darkBorder rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-purple-500">
+                            <option value="newest">Najnowsze</option>
+                            <option value="oldest">Najstarsze</option>
+                            <option value="likes">Najbardziej Potwierdzone</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Category Filters -->
-                <div class="flex flex-wrap gap-1.5 items-center">
-                    <button data-filter="ALL" class="filter-btn active text-xs font-medium px-3 py-1.5 rounded-lg bg-red-800 text-white border border-red-700 transition-all">
+                <!-- Verdict Filter Buttons -->
+                <div class="flex flex-wrap gap-1.5 items-center pt-2 border-t border-darkBorder/60">
+                    <span class="text-xs font-semibold text-gray-400 mr-2">Werdykt:</span>
+                    <button data-filter-verdict="ALL" class="verdict-filter-btn active text-xs font-medium px-3 py-1.5 rounded-lg bg-gradient-to-r from-red-900 via-purple-900 to-emerald-900 text-white border border-purple-700 transition-all">
                         Wszystkie
                     </button>
-                    <button data-filter="PRAWDA" class="filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-emerald-950/40 text-gray-300 border border-darkBorder transition-all">
+                    <button data-filter-verdict="PRAWDA" class="verdict-filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-emerald-950/40 text-gray-300 border border-darkBorder transition-all">
                         Prawda
                     </button>
-                    <button data-filter="FAŁSZ" class="filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-red-950/40 text-gray-300 border border-darkBorder transition-all">
-                        Fałsz
-                    </button>
-                    <button data-filter="PÓŁPRAWDA" class="filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-amber-950/40 text-gray-300 border border-darkBorder transition-all">
+                    <button data-filter-verdict="PÓŁPRAWDA" class="verdict-filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-amber-950/40 text-gray-300 border border-darkBorder transition-all">
                         Półprawda
                     </button>
-                    <button data-filter="MANIPULACJA" class="filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-purple-950/40 text-gray-300 border border-darkBorder transition-all">
+                    <button data-filter-verdict="MANIPULACJA" class="verdict-filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-purple-950/40 text-gray-300 border border-darkBorder transition-all">
                         Manipulacja
                     </button>
-                    <button data-filter="FAŁSZ OSTATECZNY" class="filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-red-950/80 text-gray-300 border border-darkBorder transition-all">
+                    <button data-filter-verdict="FAŁSZ" class="verdict-filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-red-950/40 text-gray-300 border border-darkBorder transition-all">
+                        Fałsz
+                    </button>
+                    <button data-filter-verdict="FAŁSZ OSTATECZNY" class="verdict-filter-btn text-xs font-medium px-3 py-1.5 rounded-lg bg-darkBg hover:bg-red-950/80 text-gray-300 border border-darkBorder transition-all">
                         Fałsz Ostateczny
                     </button>
                 </div>
+
+                <!-- Category Filter Buttons -->
+                <div class="flex flex-wrap gap-1.5 items-center">
+                    <span class="text-xs font-semibold text-gray-400 mr-2">Kategoria:</span>
+                    <button data-filter-cat="ALL" class="cat-filter-btn active text-[11px] font-semibold px-2.5 py-1 rounded-full bg-purple-950 text-purple-200 border border-purple-800 transition-all">
+                        Wszystkie
+                    </button>
+                    <button data-filter-cat="Gry" class="cat-filter-btn text-[11px] font-semibold px-2.5 py-1 rounded-full bg-darkBg hover:bg-gray-800 text-gray-400 border border-darkBorder transition-all">
+                        Gry
+                    </button>
+                    <button data-filter-cat="Minecraft" class="cat-filter-btn text-[11px] font-semibold px-2.5 py-1 rounded-full bg-darkBg hover:bg-gray-800 text-gray-400 border border-darkBorder transition-all">
+                        Minecraft
+                    </button>
+                    <button data-filter-cat="League of Legends" class="cat-filter-btn text-[11px] font-semibold px-2.5 py-1 rounded-full bg-darkBg hover:bg-gray-800 text-gray-400 border border-darkBorder transition-all">
+                        League of Legends
+                    </button>
+                    <button data-filter-cat="Życie" class="cat-filter-btn text-[11px] font-semibold px-2.5 py-1 rounded-full bg-darkBg hover:bg-gray-800 text-gray-400 border border-darkBorder transition-all">
+                        Życie
+                    </button>
+                    <button data-filter-cat="Mechanika" class="cat-filter-btn text-[11px] font-semibold px-2.5 py-1 rounded-full bg-darkBg hover:bg-gray-800 text-gray-400 border border-darkBorder transition-all">
+                        Mechanika
+                    </button>
+                </div>
+
             </div>
 
-            <!-- Quotes Cards Container -->
+            <!-- Cards Grid Container -->
             <div id="cardsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
 
             <!-- Empty State -->
-            <div id="emptyState" class="hidden text-center py-12 bg-darkCard border border-darkBorder rounded-xl">
-                <i class="fa-solid fa-ghost text-4xl text-gray-600 mb-3"></i>
-                <p class="text-gray-400 font-medium">Brak wypowiedzi spełniających podane kryteria.</p>
-                <p class="text-xs text-gray-500 mt-1">Spróbuj zmienić filtr lub wyszukiwane hasło.</p>
+            <div id="emptyState" class="hidden text-center py-16 bg-darkCard border border-darkBorder rounded-2xl">
+                <i class="fa-solid fa-ghost text-5xl text-gray-600 mb-3 animate-bounce"></i>
+                <h4 class="text-lg font-bold text-white">Brak cytatów w widoku</h4>
+                <p class="text-xs text-gray-400 mt-1">Brak wpisów dla wybranych filtrów lub wybranej osoby.</p>
             </div>
+
         </section>
 
-        <!-- Submit Section -->
-        <section id="submit" class="scroll-mt-24">
-            <div class="bg-gradient-to-br from-darkCard via-darkCard to-purple-950/20 border border-darkBorder rounded-2xl p-6 sm:p-8 glow-purple">
+        <!-- Form Submission Section -->
+        <section id="submit" class="admin-only scroll-mt-28">
+            <div class="bg-gradient-to-br from-darkCard via-darkCard to-purple-950/40 border border-purple-900/60 rounded-2xl p-6 sm:p-8 glow-purple">
                 <div class="max-w-3xl">
                     <h3 class="gothic-title text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-paper-plane text-purple-400"></i> Dodaj / Zgłoś wypowiedź
+                        <i class="fa-solid fa-paper-plane text-purple-400"></i> Zgłoś wypowiedź do weryfikacji
                     </h3>
-                    <p class="text-gray-400 text-sm mb-6">
-                        Przyłapałeś Kacpra na niespełnionej obietnicy? Wybierz tryb zapisu: dodaj od razu do swojej przeglądarki lub wyślij e-mail do moderatora serwisu.
+                    <p class="text-gray-400 text-sm mb-6 leading-relaxed">
+                        Wybierz z listy osobę (Kacper, Łukasz lub Damian), podaj treść cytatu, miejsce zdarzenia oraz uzasadnienie werdyktu.
                     </p>
 
-                    <!-- Mode Toggle Switches -->
-                    <div class="bg-darkBg p-1.5 rounded-xl border border-darkBorder flex gap-2 mb-6 max-w-md">
-                        <button type="button" id="modeLocalBtn" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all bg-purple-900 text-white shadow">
-                            <i class="fa-solid fa-hard-drive mr-1"></i> Zapis lokalny
-                        </button>
-                        <button type="button" id="modeWebhookBtn" class="flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all text-gray-400 hover:text-white">
-                            <i class="fa-solid fa-envelope mr-1"></i> Wyślij do Moderatorów
-                        </button>
-                    </div>
-
                     <form id="addQuoteForm" class="space-y-4">
+                        
+                        <!-- Dynamic Person Selector in Form -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="bg-purple-950/30 p-3 rounded-xl border border-purple-800/50">
+                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-300 mb-1.5 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-user-tag text-purple-400"></i> Wybór Osoby (Kto wypowiedział Słowa?) *
+                                </label>
+                                <select id="quotePerson" required class="w-full px-4 py-2.5 bg-darkBg border border-purple-600 rounded-xl text-sm font-bold text-white focus:outline-none focus:border-purple-400">
+                                    <option value="Kacper">Kacper "Pan Ciemności"</option>
+                                    <option value="Łukasz">Łukasz "Mistrz Uników"</option>
+                                    <option value="Damian">Damian "Lord Chaosu"</option>
+                                </select>
+                            </div>
+
+                            <div class="p-3">
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1.5">Kategoria *</label>
+                                <select id="quoteCategory" required class="w-full px-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm text-white focus:outline-none focus:border-purple-500">
+                                    <option value="Gry">Gry</option>
+                                    <option value="Minecraft">Minecraft</option>
+                                    <option value="League of Legends">League of Legends</option>
+                                    <option value="Życie">Życie</option>
+                                    <option value="Mechanika">Mechanika</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Cytat Kacpra *</label>
-                            <textarea id="quoteText" rows="3" required placeholder="np. &quot;Zaraz wracam na Discorda, idę tylko zapytać o jedną rzecz.&quot;" class="w-full px-4 py-3 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"></textarea>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1.5">Treść cytatu *</label>
+                            <textarea id="quoteText" rows="3" required placeholder="np. &quot;Nie idę dzisiaj na żaden trening, muszę odpocząć.&quot;" class="w-full px-4 py-3 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500"></textarea>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Kontekst / Źródło *</label>
-                                <input type="text" id="quoteContext" required placeholder="np. Discord / Czat w grze" class="w-full px-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors">
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1.5">Kontekst / Miejsce *</label>
+                                <input type="text" id="quoteContext" required placeholder="np. Czat Messenger, Discord" class="w-full px-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500">
                             </div>
+
                             <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Ocena Faktograficzna *</label>
-                                <select id="quoteRating" class="w-full px-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm text-white focus:outline-none focus:border-purple-500 transition-colors">
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1.5">Werdykt *</label>
+                                <select id="quoteRating" required class="w-full px-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm font-semibold text-white focus:outline-none focus:border-purple-500">
                                     <option value="FAŁSZ">FAŁSZ</option>
                                     <option value="PÓŁPRAWDA">PÓŁPRAWDA</option>
                                     <option value="MANIPULACJA">MANIPULACJA</option>
@@ -328,98 +448,124 @@
                                     <option value="PRAWDA">PRAWDA</option>
                                 </select>
                             </div>
+
                             <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Data Zgłoszenia *</label>
-                                <input type="date" id="quoteDate" required class="w-full px-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm text-white focus:outline-none focus:border-purple-500 transition-colors">
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1.5">Data zdarzenia *</label>
+                                <input type="date" id="quoteDate" required class="w-full px-4 py-2.5 bg-darkBg border border-darkBorder rounded-xl text-sm text-white focus:outline-none focus:border-purple-500">
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-2">Uzasadnienie / Dowody *</label>
-                            <textarea id="quoteReason" rows="2" required placeholder="Dlaczego to fałsz lub manipulacja? Opisz stan faktyczny..." class="w-full px-4 py-3 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"></textarea>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-gray-300 mb-1.5">Uzasadnienie Werdyktu *</label>
+                            <textarea id="quoteReason" rows="3" required placeholder="Szczegółowy opis dowodów potwierdzających lub obalających te słowa..." class="w-full px-4 py-3 bg-darkBg border border-darkBorder rounded-xl text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500"></textarea>
                         </div>
 
-                        <!-- Configurable Endpoint Block (for Webhook Mode) -->
-                        <div id="endpointConfigBlock" class="hidden bg-darkBg/80 p-4 rounded-xl border border-purple-900/50 space-y-3">
-                            <div class="flex items-center justify-between">
-                                <label class="text-xs font-bold text-purple-300">Endpoint API (Web3Forms / Formspree / EmailJS)</label>
-                                <a href="https://web3forms.com/" target="_blank" class="text-[10px] text-purple-400 hover:underline">Darmowy klucz Web3Forms &rarr;</a>
-                            </div>
-                            <input type="text" id="webhookEndpoint" placeholder="https://api.web3forms.com/submit (lub wklej Twój access_key)" class="w-full px-3 py-2 bg-darkCard border border-darkBorder rounded-lg text-xs text-white placeholder-gray-600 focus:outline-none focus:border-purple-500">
-                            <p class="text-[11px] text-gray-400">Podaj Twój Web3Forms Access Key lub adres URL z Formspree. Zgłoszenie zostanie przesłane prosto na Twój e-mail.</p>
-                        </div>
-
-                        <div class="pt-2 flex flex-col sm:flex-row gap-3">
-                            <button type="submit" id="submitBtn" class="px-6 py-3 rounded-xl bg-gradient-to-r from-red-800 to-purple-800 hover:from-red-700 hover:to-purple-700 text-white font-semibold text-sm shadow-lg hover:shadow-purple-900/40 transition-all flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-plus-circle text-xs"></i> Zapisz wypowiedź
+                        <div class="pt-2">
+                            <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-red-800 via-purple-800 to-emerald-800 hover:opacity-90 text-white font-bold text-sm shadow-xl transition-all flex items-center gap-2 border border-purple-500/40">
+                                <i class="fa-solid fa-plus-circle"></i> Zapisz nową wypowiedź
                             </button>
                         </div>
+
                     </form>
                 </div>
             </div>
         </section>
 
-        <!-- Admin / Backup Panel Section -->
-        <section id="admin" class="scroll-mt-24">
-            <div class="bg-darkCard border border-darkBorder rounded-2xl p-6 sm:p-8">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-darkBorder">
+        <!-- Admin Control Suite -->
+        <section id="admin" class="admin-only scroll-mt-28">
+            <div class="bg-darkCard border border-darkBorder rounded-2xl p-6 sm:p-8 space-y-6">
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-darkBorder">
                     <div>
                         <h3 class="gothic-title text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-sliders text-red-500"></i> Panel Administracyjny &amp; Kopie Zapasowe
+                            <i class="fa-solid fa-sliders text-purple-400"></i> Panel Administracyjny
                         </h3>
-                        <p class="text-xs text-gray-400 mt-1">Zarządzaj bazą danych na GitHub Pages (Eksportuj, importuj nową wersję JSON lub zresetuj stan)</p>
+                        <p class="text-xs text-gray-400 mt-1">Zmiany zapisują się tylko w tej przeglądarce. Wyeksportuj JSON i podmień quotes.json w repozytorium.</p>
                     </div>
+
                     <div class="flex flex-wrap gap-2">
                         <button id="exportJsonBtn" class="px-3 py-2 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-700 text-emerald-300 text-xs font-semibold transition-all flex items-center gap-1.5">
                             <i class="fa-solid fa-download"></i> Eksportuj JSON
                         </button>
+
                         <label class="px-3 py-2 rounded-lg bg-purple-950/80 hover:bg-purple-900 border border-purple-700 text-purple-300 text-xs font-semibold cursor-pointer transition-all flex items-center gap-1.5">
                             <i class="fa-solid fa-upload"></i> Importuj JSON
                             <input type="file" id="importJsonInput" accept=".json" class="hidden">
                         </label>
+
+                        <button id="generateCodeBtn" class="px-3 py-2 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-700 text-amber-300 text-xs font-semibold transition-all flex items-center gap-1.5">
+                            <i class="fa-solid fa-code"></i> Pokaż JSON
+                        </button>
+
                         <button id="resetDataBtn" class="px-3 py-2 rounded-lg bg-red-950/80 hover:bg-red-900 border border-red-700 text-red-300 text-xs font-semibold transition-all flex items-center gap-1.5">
-                            <i class="fa-solid fa-rotate-left"></i> Resetuj Domyślne
+                            <i class="fa-solid fa-rotate-left"></i> Odrzuć zmiany lokalne
                         </button>
                     </div>
                 </div>
 
-                <div class="text-xs text-gray-400 space-y-2">
-                    <p><strong class="text-gray-200">Jak opublikować zaktualizowane dane na stałe dla wszystkich odwiedzających stronę na GitHub Pages?</strong></p>
-                    <ol class="list-decimal list-inside space-y-1 text-gray-400 pl-1">
-                        <li>Dodaj wypowiedzi lub zaimportuj nowy zestaw danych w przeglądarce.</li>
-                        <li>Kliknij przycisk <span class="text-emerald-400 font-bold">"Eksportuj JSON"</span> i pobierz plik z danymi.</li>
-                        <li>Otwórz kod pliku <code class="bg-darkBg px-1 py-0.5 rounded border border-darkBorder text-purple-300">index.html</code> i zastąp tablicę <code class="bg-darkBg px-1 py-0.5 rounded border border-darkBorder text-purple-300">defaultQuotes</code> nową zawartością pliku JSON.</li>
-                        <li>Wyślij plik na repozytorium GitHub (<code class="bg-darkBg px-1 py-0.5 rounded border border-darkBorder text-purple-300">git commit &amp; push</code>). Strona zostanie natychmiast zaktualizowana dla każdego!</li>
-                    </ol>
+                <div id="codeOutputBox" class="hidden space-y-2 bg-darkBg p-4 rounded-xl border border-amber-900/50">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-amber-400">Wklej do pliku quotes.json w repozytorium:</span>
+                        <button id="copyCodeBtn" class="text-xs px-2.5 py-1 bg-amber-900 hover:bg-amber-800 text-white rounded transition-colors">
+                            <i class="fa-solid fa-copy"></i> Kopiuj Kod
+                        </button>
+                    </div>
+                    <textarea id="codeTextarea" rows="6" readonly class="w-full p-3 bg-black/60 font-mono text-[11px] text-green-400 border border-darkBorder rounded-lg focus:outline-none"></textarea>
                 </div>
+
             </div>
         </section>
 
     </main>
 
     <!-- Modal for Editing Quotes -->
-    <div id="editModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div id="editModal" role="dialog" aria-modal="true" aria-label="Edytuj wypowiedź" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-darkCard border border-darkBorder rounded-2xl p-6 max-w-2xl w-full space-y-4 relative shadow-2xl">
-            <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
+            <button id="closeModalBtn" aria-label="Zamknij" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">
                 <i class="fa-solid fa-xmark"></i>
             </button>
+            
             <h3 class="gothic-title text-xl font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-pen-to-square text-purple-400"></i> Edytuj Wypowiedź Kacpra
+                <i class="fa-solid fa-pen-to-square text-purple-400"></i> Edytuj Wypowiedź
             </h3>
+
             <form id="editQuoteForm" class="space-y-4">
                 <input type="hidden" id="editQuoteId">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="bg-purple-950/40 p-2.5 rounded-xl border border-purple-800/60">
+                        <label class="block text-xs font-bold text-purple-300 mb-1">Przypisywanie Osoby *</label>
+                        <select id="editQuotePerson" class="w-full px-3 py-2 bg-darkBg border border-purple-600 rounded-lg text-sm text-white font-bold focus:outline-none focus:border-purple-400">
+                            <option value="Kacper">Kacper "Pan Ciemności"</option>
+                            <option value="Łukasz">Łukasz "Mistrz Uników"</option>
+                            <option value="Damian">Damian "Lord Chaosu"</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">Kategoria</label>
+                        <select id="editQuoteCategory" class="w-full px-3 py-2 bg-darkBg border border-darkBorder rounded-lg text-sm text-white focus:outline-none focus:border-purple-500">
+                            <option value="Gry">Gry</option>
+                            <option value="Minecraft">Minecraft</option>
+                            <option value="League of Legends">League of Legends</option>
+                            <option value="Życie">Życie</option>
+                            <option value="Mechanika">Mechanika</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1">Cytat</label>
+                    <label class="block text-xs font-semibold text-gray-300 mb-1">Treść Cytatu</label>
                     <textarea id="editQuoteText" rows="3" required class="w-full px-3 py-2 bg-darkBg border border-darkBorder rounded-lg text-sm text-white focus:outline-none focus:border-purple-500"></textarea>
                 </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <div>
                         <label class="block text-xs font-semibold text-gray-300 mb-1">Kontekst</label>
                         <input type="text" id="editQuoteContext" required class="w-full px-3 py-2 bg-darkBg border border-darkBorder rounded-lg text-sm text-white focus:outline-none focus:border-purple-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-300 mb-1">Ocena</label>
-                        <select id="editQuoteRating" class="w-full px-3 py-2 bg-darkBg border border-darkBorder rounded-lg text-sm text-white focus:outline-none focus:border-purple-500">
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">Werdykt</label>
+                        <select id="editQuoteRating" class="w-full px-3 py-2 bg-darkBg border border-darkBorder rounded-lg text-sm font-semibold text-white focus:outline-none focus:border-purple-500">
                             <option value="FAŁSZ">FAŁSZ</option>
                             <option value="PÓŁPRAWDA">PÓŁPRAWDA</option>
                             <option value="MANIPULACJA">MANIPULACJA</option>
@@ -432,15 +578,28 @@
                         <input type="date" id="editQuoteDate" required class="w-full px-3 py-2 bg-darkBg border border-darkBorder rounded-lg text-sm text-white focus:outline-none focus:border-purple-500">
                     </div>
                 </div>
+
                 <div>
                     <label class="block text-xs font-semibold text-gray-300 mb-1">Uzasadnienie</label>
-                    <textarea id="editQuoteReason" rows="2" required class="w-full px-3 py-2 bg-darkBg border border-darkBorder rounded-lg text-sm text-white focus:outline-none focus:border-purple-500"></textarea>
+                    <textarea id="editQuoteReason" rows="3" required class="w-full px-3 py-2 bg-darkBg border border-darkBorder rounded-lg text-sm text-white focus:outline-none focus:border-purple-500"></textarea>
                 </div>
+
                 <div class="flex justify-end gap-2 pt-2">
                     <button type="button" id="cancelEditBtn" class="px-4 py-2 rounded-lg bg-darkBorder text-gray-300 text-xs font-semibold">Anuluj</button>
                     <button type="submit" class="px-4 py-2 rounded-lg bg-purple-800 hover:bg-purple-700 text-white text-xs font-semibold">Zapisz Zmiany</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Eye of Truth Audio Overlay Canvas -->
+    <div id="eyeOverlay" class="fixed inset-0 bg-red-950/40 backdrop-blur-md z-50 flex flex-col items-center justify-center p-4 hidden pointer-events-none transition-all duration-500">
+        <div class="text-center space-y-4 animate-bounce">
+            <div class="w-24 h-24 rounded-full bg-purple-950 border-4 border-purple-600 flex items-center justify-center shadow-2xl mx-auto glow-purple">
+                <i class="fa-solid fa-eye text-purple-400 text-5xl"></i>
+            </div>
+            <h2 class="gothic-title text-3xl font-black text-white tracking-widest uppercase">OKO PRAWDY TRIO AKTYWOWANE</h2>
+            <p class="text-purple-300 text-sm font-bold">Aura Kacpra, Łukasza i Damiana została prześwietlona!</p>
         </div>
     </div>
 
@@ -456,489 +615,21 @@
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-darkBorder bg-darkCard py-8 mt-16">
+    <footer class="border-t border-darkBorder bg-darkCard/80 py-8 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
             <div>
-                <p class="gothic-title text-sm font-bold text-white">DEMAGOG: Pan Ciemności Edition</p>
-                <p class="text-xs text-gray-500 mt-1">Strona przygotowana pod hosting na GitHub Pages. Wszelkie prawa zastrzeżone.</p>
+                <p class="gothic-title text-sm font-bold text-white flex items-center justify-center sm:justify-start gap-2">
+                    <i class="fa-solid fa-skull text-red-500"></i> DEMAGOG: Kacper • Łukasz • Damian
+                </p>
+                <p class="text-xs text-gray-400 mt-1">Archiwum Fact-Checkingowe (strona publiczna na GitHub Pages).</p>
             </div>
-            <div class="text-xs text-gray-500">
-                &copy; 2026 Fact-Checking Kacper • Pan Ciemności
+            <div class="text-xs text-gray-400">
+                &copy; 2026 DEMAGOG Trio Edition
             </div>
         </div>
     </footer>
 
-    <!-- Logic Script -->
-    <script>
-        // Initial Default Dataset
-        const defaultQuotes = [
-            {
-                id: 1,
-                quote: "Dzisiaj idę wcześniej spać, bo muszę jutro rano wstać.",
-                context: "Rozmowa na Discordzie, godzina 22:30",
-                date: "2026-10-24",
-                rating: "FAŁSZ",
-                reason: "Analiza logów aktywności wykazała, że Pan Ciemności grał w gry i oglądał filmy do 3:45 rano."
-            },
-            {
-                id: 2,
-                quote: "Przejmę władzę nad światem przed najbliższą niedzielą.",
-                context: "Plan podboju przedstawiony znajomym",
-                date: "2026-10-20",
-                rating: "PÓŁPRAWDA",
-                reason: "Plan podboju zaczął być wdrażany, jednak niedzielny obiad rodzinny przesunął kluczowe operacje mroczne."
-            },
-            {
-                id: 3,
-                quote: "Nie ruszałem twoich przekąsek z lodówki.",
-                context: "Zapytany o zniknięcie paczki chipsów",
-                date: "2026-10-18",
-                rating: "MANIPULACJA",
-                reason: "Technicznie ich nie ruszył ręką – zjadł je bezpośrednio prosto z paczki."
-            },
-            {
-                id: 4,
-                quote: "Pan Ciemności nigdy nie przegrywa bez walki.",
-                context: "Uroczyste oświadczenie na czacie",
-                date: "2026-10-15",
-                rating: "PRAWDA",
-                reason: "Zgodne z Mrocznym Kodeksem Honorowym Kacpra (paragraf 4, ustęp 2)."
-            },
-            {
-                id: 5,
-                quote: "Mój komputer sam się wyłączył, to nie był rage quit!",
-                context: "Komentarz po wyjściu z gry rankingowej",
-                date: "2026-10-10",
-                rating: "FAŁSZ OSTATECZNY",
-                reason: "Brak jakichkolwiek barier technicznych. Zapis z kamer potwierdza ręczne wyłączenie zasilania przyciskiem."
-            }
-        ];
-
-        const RATING_CONFIG = {
-            'PRAWDA': {
-                colorClass: 'text-emerald-400',
-                bgClass: 'bg-emerald-950/60 border-emerald-800/50',
-                badgeBg: 'bg-emerald-500',
-                icon: 'fa-circle-check'
-            },
-            'FAŁSZ': {
-                colorClass: 'text-red-400',
-                bgClass: 'bg-red-950/60 border-red-800/50',
-                badgeBg: 'bg-red-500',
-                icon: 'fa-circle-xmark'
-            },
-            'PÓŁPRAWDA': {
-                colorClass: 'text-amber-400',
-                bgClass: 'bg-amber-950/60 border-amber-800/50',
-                badgeBg: 'bg-amber-500',
-                icon: 'fa-adjust'
-            },
-            'MANIPULACJA': {
-                colorClass: 'text-purple-400',
-                bgClass: 'bg-purple-950/60 border-purple-800/50',
-                badgeBg: 'bg-purple-500',
-                icon: 'fa-mask'
-            },
-            'FAŁSZ OSTATECZNY': {
-                colorClass: 'text-red-500 font-extrabold',
-                bgClass: 'bg-red-950 border-red-900',
-                badgeBg: 'bg-red-800',
-                icon: 'fa-skull-crossbones'
-            }
-        };
-
-        // State Management
-        let quotes = [];
-        let currentFilter = 'ALL';
-        let searchQuery = '';
-        let submissionMode = 'local'; // 'local' or 'webhook'
-
-        // Load quotes from LocalStorage or initialize
-        function loadQuotes() {
-            const saved = localStorage.getItem('demagog_kacper_quotes');
-            if (saved) {
-                try {
-                    quotes = JSON.parse(saved);
-                } catch (e) {
-                    quotes = [...defaultQuotes];
-                }
-            } else {
-                quotes = [...defaultQuotes];
-                saveQuotesToStorage();
-            }
-        }
-
-        function saveQuotesToStorage() {
-            localStorage.setItem('demagog_kacper_quotes', JSON.stringify(quotes));
-        }
-
-        // Stats calculation
-        function calculateStats() {
-            const total = quotes.length;
-            const counts = {
-                'PRAWDA': 0,
-                'FAŁSZ': 0,
-                'PÓŁPRAWDA': 0,
-                'MANIPULACJA': 0,
-                'FAŁSZ OSTATECZNY': 0
-            };
-
-            quotes.forEach(q => {
-                if (counts[q.rating] !== undefined) {
-                    counts[q.rating]++;
-                }
-            });
-
-            document.getElementById('totalCount').innerText = total;
-
-            const getPct = (cnt) => total > 0 ? Math.round((cnt / total) * 100) : 0;
-
-            document.getElementById('countPrawda').innerText = counts['PRAWDA'];
-            document.getElementById('countFalsz').innerText = counts['FAŁSZ'];
-            document.getElementById('countPolprawda').innerText = counts['PÓŁPRAWDA'];
-            document.getElementById('countManipulacja').innerText = counts['MANIPULACJA'];
-            document.getElementById('countFalszOstateczny').innerText = counts['FAŁSZ OSTATECZNY'];
-
-            document.getElementById('pctPrawda').innerText = `${getPct(counts['PRAWDA'])}%`;
-            document.getElementById('pctFalsz').innerText = `${getPct(counts['FAŁSZ'])}%`;
-            document.getElementById('pctPolprawda').innerText = `${getPct(counts['PÓŁPRAWDA'])}%`;
-            document.getElementById('pctManipulacja').innerText = `${getPct(counts['MANIPULACJA'])}%`;
-            document.getElementById('pctFalszOstateczny').innerText = `${getPct(counts['FAŁSZ OSTATECZNY'])}%`;
-
-            document.getElementById('barPrawda').style.width = `${getPct(counts['PRAWDA'])}%`;
-            document.getElementById('barFalsz').style.width = `${getPct(counts['FAŁSZ'])}%`;
-            document.getElementById('barPolprawda').style.width = `${getPct(counts['PÓŁPRAWDA'])}%`;
-            document.getElementById('barManipulacja').style.width = `${getPct(counts['MANIPULACJA'])}%`;
-            document.getElementById('barFalszOstateczny').style.width = `${getPct(counts['FAŁSZ OSTATECZNY'])}%`;
-
-            const truthRate = getPct(counts['PRAWDA']);
-            document.getElementById('truthRatePercentage').innerText = `${truthRate}%`;
-            document.getElementById('truthRateBar').style.width = `${truthRate}%`;
-        }
-
-        // Render Quotes
-        function renderCards() {
-            const container = document.getElementById('cardsContainer');
-            const emptyState = document.getElementById('emptyState');
-
-            const filtered = quotes.filter(q => {
-                const matchesFilter = currentFilter === 'ALL' || q.rating === currentFilter;
-                const matchesSearch = q.quote.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                      q.context.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                                      q.reason.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchesFilter && matchesSearch;
-            });
-
-            if (filtered.length === 0) {
-                container.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                return;
-            }
-
-            emptyState.classList.add('hidden');
-
-            container.innerHTML = filtered.map(q => {
-                const conf = RATING_CONFIG[q.rating] || RATING_CONFIG['MANIPULACJA'];
-                return `
-                    <div class="bg-darkCard border border-darkBorder rounded-xl p-6 flex flex-col justify-between card-hover relative overflow-hidden group">
-                        <div class="absolute left-0 top-0 bottom-0 w-1.5 ${conf.badgeBg}"></div>
-
-                        <div>
-                            <!-- Card Header -->
-                            <div class="flex items-start justify-between gap-2 mb-3 pl-2">
-                                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold uppercase tracking-wider border ${conf.bgClass} ${conf.colorClass}">
-                                    <i class="fa-solid ${conf.icon}"></i>
-                                    ${q.rating}
-                                </span>
-                                <div class="flex items-center gap-2">
-                                    <span class="text-[11px] text-gray-500 flex items-center gap-1">
-                                        <i class="fa-regular fa-calendar text-gray-600"></i> ${q.date}
-                                    </span>
-                                    <button onclick="openEditModal(${q.id})" class="text-gray-500 hover:text-purple-400 p-1 transition-colors" title="Edytuj">
-                                        <i class="fa-solid fa-pen text-xs"></i>
-                                    </button>
-                                    <button onclick="deleteQuote(${q.id})" class="text-gray-500 hover:text-red-400 p-1 transition-colors" title="Usuń">
-                                        <i class="fa-solid fa-trash text-xs"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- Quote -->
-                            <blockquote class="text-base sm:text-lg font-semibold text-white pl-2 mb-3 leading-snug italic border-l-2 border-gray-700">
-                                "${escapeHtml(q.quote)}"
-                            </blockquote>
-
-                            <!-- Context -->
-                            <p class="text-xs text-gray-400 pl-2 mb-4 flex items-center gap-1.5">
-                                <i class="fa-solid fa-location-dot text-red-500/70"></i>
-                                Kontekst: <span class="text-gray-300 font-medium">${escapeHtml(q.context)}</span>
-                            </p>
-                        </div>
-
-                        <!-- Justification -->
-                        <div class="mt-4 pt-3 border-t border-darkBorder/60 bg-darkBg/50 -mx-6 -mb-6 p-4 rounded-b-xl">
-                            <div class="text-[11px] font-bold uppercase tracking-wider text-purple-400 mb-1 flex items-center gap-1">
-                                <i class="fa-solid fa-file-contract"></i> Weryfikacja &amp; Analiza:
-                            </div>
-                            <p class="text-xs text-gray-300 leading-relaxed">
-                                ${escapeHtml(q.reason)}
-                            </p>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Actions: Delete & Edit
-        function deleteQuote(id) {
-            if (confirm("Czy na pewno chcesz usunąć tę wypowiedź Pana Ciemności z lokalnej bazy?")) {
-                quotes = quotes.filter(q => q.id !== id);
-                saveQuotesToStorage();
-                calculateStats();
-                renderCards();
-                showToast("Usunięto wypowiedź", "Wypowiedź została usunięta z bazy danych.");
-            }
-        }
-
-        function openEditModal(id) {
-            const q = quotes.find(item => item.id === id);
-            if (!q) return;
-
-            document.getElementById('editQuoteId').value = q.id;
-            document.getElementById('editQuoteText').value = q.quote;
-            document.getElementById('editQuoteContext').value = q.context;
-            document.getElementById('editQuoteRating').value = q.rating;
-            document.getElementById('editQuoteDate').value = q.date;
-            document.getElementById('editQuoteReason').value = q.reason;
-
-            document.getElementById('editModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('editModal').classList.add('hidden');
-        }
-
-        // Helper Escaper
-        function escapeHtml(str) {
-            return str ? str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;") : '';
-        }
-
-        // Toast Notification
-        function showToast(title, message) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastTitle').innerText = title;
-            document.getElementById('toastMessage').innerText = message;
-
-            toast.classList.remove('translate-y-24', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-24', 'opacity-0');
-            }, 3500);
-        }
-
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set default date input to today
-            document.getElementById('quoteDate').value = new Date().toISOString().split('T')[0];
-
-            loadQuotes();
-            calculateStats();
-            renderCards();
-
-            // Search
-            document.getElementById('searchInput').addEventListener('input', (e) => {
-                searchQuery = e.target.value;
-                renderCards();
-            });
-
-            // Filters
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-btn').forEach(b => {
-                        b.classList.remove('bg-red-800', 'text-white', 'active');
-                        b.classList.add('bg-darkBg', 'text-gray-300');
-                    });
-                    btn.classList.remove('bg-darkBg', 'text-gray-300');
-                    btn.classList.add('bg-red-800', 'text-white', 'active');
-
-                    currentFilter = btn.getAttribute('data-filter');
-                    renderCards();
-                });
-            });
-
-            // Submission Mode Switcher
-            const modeLocalBtn = document.getElementById('modeLocalBtn');
-            const modeWebhookBtn = document.getElementById('modeWebhookBtn');
-            const endpointBlock = document.getElementById('endpointConfigBlock');
-            const submitBtn = document.getElementById('submitBtn');
-
-            modeLocalBtn.addEventListener('click', () => {
-                submissionMode = 'local';
-                modeLocalBtn.className = "flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all bg-purple-900 text-white shadow";
-                modeWebhookBtn.className = "flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all text-gray-400 hover:text-white";
-                endpointBlock.classList.add('hidden');
-                submitBtn.innerHTML = '<i class="fa-solid fa-plus-circle text-xs"></i> Zapisz wypowiedź na stronie';
-            });
-
-            modeWebhookBtn.addEventListener('click', () => {
-                submissionMode = 'webhook';
-                modeWebhookBtn.className = "flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all bg-purple-900 text-white shadow";
-                modeLocalBtn.className = "flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all text-gray-400 hover:text-white";
-                endpointBlock.classList.remove('hidden');
-                submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-xs"></i> Wyślij zgłoszenie do moderatora';
-            });
-
-            // Add Form Submission
-            document.getElementById('addQuoteForm').addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                const quoteText = document.getElementById('quoteText').value.trim();
-                const quoteContext = document.getElementById('quoteContext').value.trim();
-                const quoteRating = document.getElementById('quoteRating').value;
-                const quoteDate = document.getElementById('quoteDate').value;
-                const quoteReason = document.getElementById('quoteReason').value.trim();
-
-                if (!quoteText || !quoteContext || !quoteReason) return;
-
-                if (submissionMode === 'local') {
-                    // Save directly to localStorage
-                    const newQuote = {
-                        id: Date.now(),
-                        quote: quoteText,
-                        context: quoteContext,
-                        date: quoteDate,
-                        rating: quoteRating,
-                        reason: quoteReason
-                    };
-
-                    quotes.unshift(newQuote);
-                    saveQuotesToStorage();
-                    calculateStats();
-                    renderCards();
-
-                    e.target.reset();
-                    document.getElementById('quoteDate').value = new Date().toISOString().split('T')[0];
-                    showToast("Dodano Pomyślnie!", "Wypowiedź została zapisana w pamięci przeglądarki.");
-                } else {
-                    // Webhook / Web3Forms / Formspree Mode
-                    let endpoint = document.getElementById('webhookEndpoint').value.trim();
-                    if (!endpoint) {
-                        alert("Podaj swój adres Webhook / Access Key usługi Web3Forms lub Formspree!");
-                        return;
-                    }
-
-                    // Format URL if user entered only Access Key for Web3Forms
-                    if (!endpoint.startsWith('http://') && !endpoint.startsWith('https://')) {
-                        endpoint = `https://api.web3forms.com/submit`;
-                    }
-
-                    const payload = {
-                        access_key: document.getElementById('webhookEndpoint').value.trim(),
-                        subject: `[Fact-Check Kacper] Nowe zgłoszenie: ${quoteRating}`,
-                        quote: quoteText,
-                        context: quoteContext,
-                        rating: quoteRating,
-                        date: quoteDate,
-                        reason: quoteReason,
-                        from_name: "DEMAGOG Pan Ciemności"
-                    };
-
-                    submitBtn.disabled = true;
-                    submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Wysyłanie...';
-
-                    try {
-                        const response = await fetch(endpoint, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (response.ok) {
-                            showToast("Wysłano Zgłoszenie!", "Zgłoszenie trafiło na skrzynkę e-mail moderatora.");
-                            e.target.reset();
-                        } else {
-                            showToast("Błąd wysyłki", "Sprawdź poprawność klucza Web3Forms/Formspree.");
-                        }
-                    } catch (err) {
-                        showToast("Błąd połączenia", "Nie udało się nawiązać połączenia z serwerem API.");
-                    } finally {
-                        submitBtn.disabled = false;
-                        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-xs"></i> Wyślij zgłoszenie do moderatora';
-                    }
-                }
-            });
-
-            // Edit Modal Submissions
-            document.getElementById('editQuoteForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                const id = parseInt(document.getElementById('editQuoteId').value);
-                const q = quotes.find(item => item.id === id);
-
-                if (q) {
-                    q.quote = document.getElementById('editQuoteText').value.trim();
-                    q.context = document.getElementById('editQuoteContext').value.trim();
-                    q.rating = document.getElementById('editQuoteRating').value;
-                    q.date = document.getElementById('editQuoteDate').value;
-                    q.reason = document.getElementById('editQuoteReason').value.trim();
-
-                    saveQuotesToStorage();
-                    calculateStats();
-                    renderCards();
-                    closeModal();
-                    showToast("Zapisano zmiany", "Wypowiedź została pomyślnie zaktualizowana.");
-                }
-            });
-
-            document.getElementById('closeModalBtn').addEventListener('click', closeModal);
-            document.getElementById('cancelEditBtn').addEventListener('click', closeModal);
-
-            // Export to JSON
-            document.getElementById('exportJsonBtn').addEventListener('click', () => {
-                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(quotes, null, 2));
-                const downloadAnchor = document.createElement('a');
-                downloadAnchor.setAttribute("href", dataStr);
-                downloadAnchor.setAttribute("download", `kacper_demagog_backup_${new Date().toISOString().split('T')[0]}.json`);
-                document.body.appendChild(downloadAnchor);
-                downloadAnchor.click();
-                downloadAnchor.remove();
-                showToast("Pobrano plik JSON", "Możesz go użyć do aktualizacji domyślnych danych na GitHub Pages.");
-            });
-
-            // Import from JSON File
-            document.getElementById('importJsonInput').addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    try {
-                        const importedData = JSON.parse(event.target.result);
-                        if (Array.isArray(importedData)) {
-                            quotes = importedData;
-                            saveQuotesToStorage();
-                            calculateStats();
-                            renderCards();
-                            showToast("Pomyślny import!", `Zaimportowano ${quotes.length} wypowiedzi.`);
-                        } else {
-                            alert("Niepoprawny format pliku JSON. Wymagana jest tablica obiektów.");
-                        }
-                    } catch (err) {
-                        alert("Błąd podczas odczytu pliku JSON: " + err.message);
-                    }
-                };
-                reader.readAsText(file);
-            });
-
-            // Reset to Default
-            document.getElementById('resetDataBtn').addEventListener('click', () => {
-                if (confirm("Czy na pewno chcesz zresetować bazę danych do domyślnych wypowiedzi Kacpra? Usunie to Twoje lokalne wpisy.")) {
-                    quotes = [...defaultQuotes];
-                    saveQuotesToStorage();
-                    calculateStats();
-                    renderCards();
-                    showToast("Zresetowano dane", "Przywrócono początkowy zestaw wypowiedzi.");
-                }
-            });
-        });
-    </script>
+    <!-- Core JavaScript Code -->
+    <script src="app.js" defer></script>
 </body>
 </html>

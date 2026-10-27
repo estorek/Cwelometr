@@ -1,0 +1,26 @@
+body {
+            background-color: #08080c;
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(circle at 50% 0%, rgba(88, 28, 135, 0.18), transparent 70%),
+                              radial-gradient(circle at 10% 40%, rgba(153, 27, 27, 0.12), transparent 50%),
+                              radial-gradient(circle at 90% 70%, rgba(6, 95, 70, 0.12), transparent 50%);
+            background-attachment: fixed;
+        }
+        .gothic-title {
+            font-family: 'Cinzel', serif;
+        }
+        .glow-crimson { box-shadow: 0 0 25px rgba(153, 27, 27, 0.4); }
+        .glow-purple { box-shadow: 0 0 25px rgba(88, 28, 135, 0.4); }
+        .glow-emerald { box-shadow: 0 0 25px rgba(6, 95, 70, 0.4); }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.8), 0 0 20px rgba(168, 85, 247, 0.25);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #08080c; }
+        ::-webkit-scrollbar-thumb { background: #1e2230; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #991b1b; }
